@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-#ログイン条件
+#ログイン条件➝rails db:seedコマンド
 Admin.create!(email: 'admin@.com', password: '12345')

@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-10 mt-5 mb-5">
+      <h1 class="bg-light d-inline-block px-3">管理者ログイン</h1>
+    </div>
+
+    <div class="col-8 mx-auto">
+      <%= form_for(:admin, url: admin_session_path) do |f| %>
+        <div class="form-group">
+          <%= f.label :email, "Email" %>
+          <%= f.email_field :email, class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password, "パスワード" %>
+          <%= f.password_field :password, class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "ログイン", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

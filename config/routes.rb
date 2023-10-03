@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # 管理者とユーザーで区別
   devise_for :customers,controllers: {
   sessions: "public/sessions",
+  passwords: 'public/passwords',
   registrations: 'public/registrations',
 }
 

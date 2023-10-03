@@ -2,11 +2,6 @@ Rails.application.routes.draw do
   # devise_for :customers
   # devise_for :end_users
 
-  # ゲストユーザー
-  devise_scope :public do
-    post 'public/guest_sign_in', to: 'public/sessions#guest_sign_in'
-  end
-
   # skipオプション：不要なルーティングを削除
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
@@ -16,6 +11,12 @@ Rails.application.routes.draw do
   sessions: "public/sessions",
   registrations: 'public/registrations',
 }
+
+  # ゲストユーザー
+  devise_scope :public do
+    post 'public/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
 
   scope module: :public do
     root to: 'homes#top'

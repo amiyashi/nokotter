@@ -23,8 +23,9 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get 'about' => "homes#about"
     resources :bookmarks, only: [:index, :show, :edit, :update, :destroy]
-    patch 'members/withdrawal' => "members#withdrawal"
-    get 'members/confirm_withdrawal' => "members#confirm_withdrawal"
+    patch 'customers/withdrawal' => "customers#withdrawal"
+    get 'customers/confirm_withdrawal' => "customers#confirm_withdrawal"
+    resources :customers, only: [:show, :edit, :update]
     resources :recipes, only: [:index, :new, :create, :show, :edit,:update, :destroy]
   end
 

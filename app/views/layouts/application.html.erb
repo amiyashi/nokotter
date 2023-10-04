@@ -7,55 +7,90 @@
     <%= csp_meta_tag %>
     <!--style.cssよりも前にFont Awesomeに関する記述-->
     <script src="https://kit.fontawesome.com/fe8aa78a6e.js" crossorigin="anonymous"></script>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <ul class="row justify-content-end my-2 list-unstyled">
-          <% if customer_signed_in? %>
-            <li class="nav-item mx-2 mt-2">
-              <!--<i class="fa-solid fa-circle-user"></i>-->
-              <%= link_to "マイページ", customers_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
-            </li>
-            <li class="nav-item mx-2 mt-2">
-              <%= link_to "タイムライン", bookmarks_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
-            </li>
-            <li class="nav-item mx-2 mt-2">
-              <%= link_to "レシピ一覧", recipes_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
-            </li>
-            <!--<li class="nav-item mx-2 mt-2">-->
-            <!--  <i class="fa-solid fa-cart-shopping"></i>-->
-            <!--  <%#= link_to "ユーザー一覧", recipes_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>-->
-            <!--</li>-->
-            <li class="nav-item mx-2 mt-2">
-              <i class="fa-solid fa-right-from-bracket"></i>
-              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
-            </li>
-          <% elsif admin_signed_in? %>
-            <li class="nav-item mx-2 mt-2">
-              <%= link_to "ユーザー一覧", admin_customers_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
-            </li>
-            <li class="nav-item mx-2 mt-2">
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
-            </li>
-          <% else %>
-            <li class="nav-item mx-2 mt-2">
-              <%= link_to "About", about_path, class: "text-decoration-none align-middle align-middle", style: "color: #3B240B" %>
-            </li>
-            <li class="nav-item mx-2 mt-2">
-              <%= link_to "商品一覧", items_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
-            </li>
-            <li class="nav-item mx-2 mt-2">
-              <%= link_to "新規登録", new_customer_registration_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
-            </li>
-            <li class="nav-item mx-2 mt-2">
-              <%= link_to "ログイン", new_customer_session_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
-            </li>
-          <% end %>
-        </ul>
+      
+        <div class="container-fluid">
+          <div class="row mx-auto">
+
+            
+            <div class="col-9 mt-3 text-right">
+            
+
+                <% if customer_signed_in? %>
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "マイページ", "/customers/#{current_customer.id}", class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+                  </li>
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "タイムライン", bookmarks_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+                  </li>
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "レシピ一覧", recipes_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+                  </li>
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "ユーザー一覧", recipes_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+                  </li>
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+                  </li>
+                </ul>
+                <% elsif admin_signed_in? %>
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "ユーザー一覧", admin_customers_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+                  </li>
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+                  </li>
+                </ul>
+                <% else %>
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "About", about_path, class: "text-decoration-none align-middle align-middle", style: "color: #3B240B" %>
+                  </li>
+                  <li class="nav-item mx-2 mt-2">
+                    <%#= link_to 'ゲストログイン', public_guest_sign_in_path, class: "text-decoration-none align-middle align-middle", method: :post %>
+                  </li>
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "新規登録", new_customer_registration_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+                  </li>
+                  <li class="nav-item mx-2 mt-2">
+                    <%= link_to "ログイン", new_customer_session_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+                  </li>
+                  </ul>
+                <% end %>
+
+            </div>
+
+            <div class="col-3 mt-3 text-right">
+              <% if customer_signed_in?%>
+                <p><%= "ようこそ、#{current_customer.last_name}#{current_customer.first_name}さん！" %></p>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      </nav>
     </header>
+
+    <main class="mb-auto">
     <%= yield %>
+    </main>
+
+    <footer class="mt-auto footer py-3">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="mx-auto">
+            <p>残り物なんて、怖くない</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>

@@ -1,7 +1,11 @@
 class Public::CustomersController < ApplicationController
+  
+  def new
+    @customer = Customer.new
+  end
 
   def show
-    @nickname = current_user.nickname
+    @customer = current_customer
   end
 
 end

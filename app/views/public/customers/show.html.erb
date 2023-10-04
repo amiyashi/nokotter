@@ -1,1 +1,36 @@
-<p><%= @nickname %>さんのマイページ</p>
+<div class="container">
+
+  <div class="row">
+    <p><%= @customer.last_name %><%= @customer.first_name %>さんのマイページ</p>
+  </div>
+
+  <div class="row">
+    <h2>マイページ</h2>
+  </div>
+
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th class="table-active">氏名</th>
+        <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+      </tr>
+      <tr>
+        <th class="table-active">フリガナ</th>
+        <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+      </tr>
+      <tr>
+        <th class="table-active">メールアドレス</th>
+        <td><%= @customer.email %></td>
+      </tr>
+      <tr>
+        <th class="table-active">生年月日</th>
+        <td><%= @customer.birth_date %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="row">
+    <%= link_to '編集する', edit_customer_path(current_customer), class:"btn btn-success my-1 mx-4 px-4" %>
+　</div>
+
+</div>

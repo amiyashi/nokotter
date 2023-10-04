@@ -1,1 +1,36 @@
-投稿一覧
+<div class="container">
+
+  <div class="row">
+    <p><%= @customer.last_name %> <%= @customer.first_name %>さんのレシピ一覧</p>
+  </div>
+
+  <div class="row">
+    <%= link_to "レシピを追加する", new_recipe_path, class: "text-decoration-none align-middle" %>
+  </div>
+
+  <div class="row">
+    <table>
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>レシピ</th>
+          <th>画像</th>
+        </tr>
+      </thead>
+      <% @recipes.each do |recipe| %>
+      <tbody>
+        <tr>
+          <td class="align-items-center">
+            <%= link_to recipe_path(recipe) do %>
+              <%= recipe.title %>
+            <% end %>
+          </td>
+          <td class="align-items-center"><%= recipe.description %></td>
+          <td class="align-items-center"><%= image_tag recipe.image, size: "250x150", class: "img-fluid" %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+
+</div>

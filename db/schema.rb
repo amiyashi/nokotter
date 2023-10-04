@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2023_10_04_044827) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.integer "end_user_id", null: false
+    t.integer "customer_id", null: false
     t.string "title", null: false
     t.text "description", null: false
     t.datetime "created_at", precision: 6, null: false

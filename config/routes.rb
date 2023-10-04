@@ -22,11 +22,11 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => "homes#about"
+    resources :recipes
     resources :bookmarks, only: [:index, :show, :edit, :update, :destroy]
     patch 'customers/withdrawal' => "customers#withdrawal"
     get 'customers/confirm_withdrawal' => "customers#confirm_withdrawal"
     resources :customers, only: [:show, :edit, :update]
-    resources :recipes, only: [:index, :new, :create, :show, :edit,:update, :destroy]
   end
 
   namespace :admin do

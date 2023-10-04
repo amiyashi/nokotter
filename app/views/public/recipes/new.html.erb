@@ -1,0 +1,37 @@
+<div class="container">
+
+  <div class="row">
+    <h2>レシピを追加しよう</h2>
+  </div>
+
+  <div class="row">
+    <%= form_with model: @recipe, url: recipes_path, local: true do |f| %>
+    <table>
+        <tr>
+          <div class="form-group">
+            <th>画像</th>
+            <td><%= f.file_field :image, accept: "image/*" %></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <th>タイトル</th>
+            <td><%= f.text_field :title, placeholder:"(例)ピーマンの甘煮" %></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <th>レシピ</th>
+            <td><%= f.text_area :description, size: "50x5", placeholder:"(例)【手順1】ピーマンを縦半分にカットします。" %></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-action">
+            <th><%= f.submit "レシピの追加", class: "btn btn-success" %></th>
+          </div>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+
+</div>

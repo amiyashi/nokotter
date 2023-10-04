@@ -1,14 +1,16 @@
 class Public::RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
+    @customer = current_customer
   end
-  
+
   def new
     @recipe = Recipe.new
   end
-  
+
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.customer_id = current_customer.id
     if @recipe.save
       flash[:notice] = "投稿が完了しました。"
       redirect_to recipe_path(@recipe.id)
@@ -17,15 +19,15 @@ class Public::RecipesController < ApplicationController
       render :new
     end
   end
-  
+
   def show
     @recipe = Recipe.find(params[:id])
   end
-  
+
   def edit
     @recipe = Recipe.find(params[:id])
   end
-  
+
   def update
     @recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
@@ -36,10 +38,10 @@ class Public::RecipesController < ApplicationController
       render :edit
     end
   end
-  
+
   private
   def recipe_params
-    params.require(:recipe).permit(:image, :title, :description,:end_user_id)
+    params.require(:recipe).permit(:image, :title, :description, :customer_id)
   end
-  
+
 end

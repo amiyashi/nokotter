@@ -1,0 +1,37 @@
+<div class="container">
+
+  <div class="row">
+    <h2>商品編集</h2>
+  </div>
+
+  <div class="row">
+    <%= form_with model: @recipe, url: recipe_path, local: true do |f| %>
+    <table>
+        <tr>
+          <div class="form-group">
+            <th>レシピ画像</th>
+            <td><%= f.file_field :image, accept: "image/*" %></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <th>レシピ名</th>
+            <td><%= f.text_field :title, placeholder:"変更後のレシピ名を入力してください" %></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <th>レシピ</th>
+            <td><%= f.text_area :description, size: "50x5", placeholder:"ここにレシピを記述してください" %></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-action">
+            <th><%= f.submit "変更を保存", class: "btn btn-success" %></th>
+          </div>
+        </tr>
+      </table>
+      <% end %>
+  </div>
+
+</div>

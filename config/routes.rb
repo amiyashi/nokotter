@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 }
 
   # ゲストユーザー
-  devise_scope :public do
+  devise_scope :customer do
     post 'public/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 

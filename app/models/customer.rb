@@ -4,10 +4,10 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # has_many :bookmarks, dependent: :destroy
-  # has_many :comments, dependent: :destroy
-  # has_many :recipes, dependent: :destroy
-  # has_many :relationships, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :recipes, dependent: :destroy
+  has_many :relationships, dependent: :destroy
 
   def self.guest
     #'guest@example.com'に一致するレコードをDBから探し、見つからなかった場合に新しいレコードを作成

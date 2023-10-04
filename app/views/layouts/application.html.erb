@@ -12,22 +12,68 @@
 
   <body>
     <header>
-      <% if customer_signed_in? %>
-        <li>
-          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-        </li>
-      <% elsif admin_signed_in? %>
-        <li>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "新規登録", new_customer_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_customer_session_path %>
-        </li>
-      <% end %>
+      <ul class="row justify-content-end my-2 list-unstyled">
+          <% if customer_signed_in? %>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-regular fa-user"></i>
+              <%= link_to "マイページ", customers_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-cake-candles"></i>
+              <%= link_to "タイムライン", bookmarks_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <%= link_to "レシピ一覧", recipes_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+            <!--<li class="nav-item mx-2 mt-2">-->
+            <!--  <i class="fa-solid fa-cart-shopping"></i>-->
+            <!--  <%#= link_to "ユーザー一覧", recipes_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>-->
+            <!--</li>-->
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+          <% elsif admin_signed_in? %>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-cake-candles"></i>
+              <%= link_to "商品一覧", admin_items_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-users"></i>
+              <%= link_to "会員一覧", admin_customers_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-cart-flatbed-suitcase"></i>
+              <%= link_to "注文履歴一覧", admin_orders_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-cookie-bite"></i>
+              <%= link_to "ジャンル一覧", admin_genres_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+          <% else %>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-store"></i>
+              <%= link_to "About", about_path, class: "text-decoration-none align-middle align-middle", style: "color: #3B240B" %>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-cake-candles"></i>
+              <%= link_to "商品一覧", items_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-regular fa-handshake"></i>
+              <%= link_to "新規登録", new_customer_registration_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+            <li class="nav-item mx-2 mt-2">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <%= link_to "ログイン", new_customer_session_path, class: "text-decoration-none align-middle", style: "color: #3B240B" %>
+            </li>
+          <% end %>
+        </ul>
     </header>
     <%= yield %>
   </body>

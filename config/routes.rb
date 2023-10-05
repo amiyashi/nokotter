@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get 'customers/confirm_withdrawal' => "customers#confirm_withdrawal"
     resources :customers, only: [:show, :edit, :update]
     resources :bookmarks, only: [:index, :show, :edit, :update, :destroy]
+    get "search_tag" => "recipes#search_tag"
   end
 
   namespace :admin do

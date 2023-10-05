@@ -11,6 +11,14 @@
   <div class="row">
       <p><%= @recipe.description %></p>
   </div>
+  
+  <div class="row">
+    <!-- タグリスト -->
+    <% @recipe_tags.each do |tag| %>
+    <i class="fa-sharp fa-solid fa-tag"></i>
+      <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
+    <% end %>
+  </div>
 
   <div class="row">
     <p><%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-custom" %></p>

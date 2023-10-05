@@ -26,6 +26,12 @@
           </div>
         </tr>
         <tr>
+          <div class="form-group">
+            <th>タグ(,で区切ると複数タグ登録できます)</th>
+            <td><%= f.text_field :name,value: @tag_list, class: 'form-control' %></td>
+          </div>
+        </tr>
+        <tr>
           <div class="form-action">
             <th><%= f.submit "変更を保存", class: "btn btn-success" %></th>
           </div>

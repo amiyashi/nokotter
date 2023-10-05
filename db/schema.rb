@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2023_10_04_044827) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipe_id", "tag_id"], name: "index_recipe_tag_relations_on_recipe_id_and_tag_id", unique: true
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -129,6 +130,7 @@ ActiveRecord::Schema.define(version: 2023_10_04_044827) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

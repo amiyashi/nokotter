@@ -1,24 +1,12 @@
-<div class="container">
+<h2>タグが<%=@tag.name%>の投稿一覧</h2>
 
-  <div class="row">
-    <p><%= @customer.last_name %> <%= @customer.first_name %>さんのレシピ一覧</p>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <!--レシピ追加ボタン-->
-      <%= link_to "レシピを追加する", new_recipe_path, class: "text-decoration-none align-middle" %>
-    </div>
-    <div class="col">
-      <!--タグ一覧-->
-      <% @tag_list.each do |list|%>
-        <i class="fa-sharp fa-solid fa-tag"></i>
-        <%=link_to list.name,search_tag_path(tag_id: list.id) %>
-        <%="(#{list.recipes.count})" %>
-      <% end %>
-    </div>
-  </div>
-
+  <!--タグリスト-->
+  <% @tag_list.each do |list|%>
+    <i class="fa-sharp fa-solid fa-tag"></i>
+    <%=link_to list.name,search_tag_path(tag_id: list.id) %>
+    <%="(#{list.recipes.count})" %>
+  <% end %>
+  
   <div class="row">
     <table>
       <thead>
@@ -43,5 +31,3 @@
       <% end %>
     </table>
   </div>
-
-</div>

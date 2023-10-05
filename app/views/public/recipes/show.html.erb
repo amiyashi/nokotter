@@ -18,6 +18,20 @@
     <i class="fa-sharp fa-solid fa-tag"></i>
       <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
     <% end %>
+    <!--ブックマーク表示-->
+    <% if @recipe.favorited_by?(current_customer) %>
+    <p>
+      <%= link_to recipe_bookmarks_path(@recipe), method: :delete do %>
+        <i class="fa-solid fa-clipboard"></i><%= @recipe.bookmarks.count %> 保存
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to recipe_bookmarks_path(@recipe), method: :post do %>
+        <i class="fa-regular fa-clipboard"></i><%= @recipe.bookmarks.count %> 保存
+      <% end %>
+    </p>
+  <% end %>
   </div>
 
   <div class="row">

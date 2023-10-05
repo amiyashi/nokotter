@@ -24,11 +24,12 @@ Rails.application.routes.draw do
     get 'about' => "homes#about"
     resources :recipes do
       resources :comments, only: [:create, :destroy]
+      resource :bookmarks, only: [:index, :create, :destroy]
+      # 1人のユーザーは1つの投稿に対して1回しかいいねできない➝id受け渡し必要ないresource(単数形)
     end
     patch 'customers/withdrawal' => "customers#withdrawal"
     get 'customers/confirm_withdrawal' => "customers#confirm_withdrawal"
     resources :customers, only: [:show, :edit, :update]
-    resources :bookmarks, only: [:index, :show, :edit, :update, :destroy]
     get "search_tag" => "recipes#search_tag"
   end
 

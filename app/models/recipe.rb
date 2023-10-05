@@ -8,6 +8,7 @@ class Recipe < ApplicationRecord
   # ActiveStorage導入
   has_one_attached :image
 
+  # タグ機能
   def save_tags(tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil? # タグが存在していれば、タグの名前を配列として全て取得
     old_tags = current_tags - tags # 現在取得したタグから、送られてきたタグを除く
@@ -23,4 +24,11 @@ class Recipe < ApplicationRecord
       self.tags << tag
     end
   end
+
+  # ブックマーク機能
+  # 引数で渡されたidがBookmarksテーブルに存在（exists?）するか
+  def favorited_by?(customer)
+    bookmarks.exists?(customer_id: customer.id)
+  end
+
 end

@@ -11,7 +11,7 @@
   <div class="row">
       <p><%= @recipe.description %></p>
   </div>
-  
+
   <div class="row">
     <!-- タグリスト -->
     <% @recipe_tags.each do |tag| %>
@@ -22,6 +22,37 @@
 
   <div class="row">
     <p><%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-custom" %></p>
+  </div>
+
+  <div class="row">
+    コメント件数：<%= @recipe.comments.count %>
+  </div>
+  
+  <div class="row">
+    <table>
+      <tbody>
+      <% @recipe.comments.each do |comment| %>
+        <tr>
+          <td><%= comment.customer.last_name %><%= comment.customer.first_name %></td>
+          <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+          <td><%= comment.content %></td>
+          <td>
+            <% if comment.customer == current_customer %>
+              <%= link_to "編集する", edit_recipe_path(@recipe) %>
+              <%= link_to "削除", recipe_comment_path(comment.recipe, comment), method: :delete %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <div>
+    <%= form_with model: [@recipe, @comment] do |f| %>
+      <%= f.text_area :content, rows: '1', placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
+    <% end %>
   </div>
 
 </div>

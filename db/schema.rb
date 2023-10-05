@@ -53,14 +53,14 @@ ActiveRecord::Schema.define(version: 2023_10_04_044827) do
   end
 
   create_table "bookmarks", force: :cascade do |t|
-    t.integer "end_user_id", null: false
+    t.integer "customer", null: false
     t.integer "recipe_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "end_user_id", null: false
+    t.integer "customer_id", null: false
     t.integer "recipe_id", null: false
     t.text "content"
     t.datetime "created_at", precision: 6, null: false

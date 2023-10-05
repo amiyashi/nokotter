@@ -27,6 +27,7 @@ class Public::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @comment = Comment.new
     @tag_list = @recipe.tags.pluck(:name).join(',')
     @recipe_tags = @recipe.tags
   end
@@ -48,7 +49,12 @@ class Public::RecipesController < ApplicationController
       render :edit
     end
   end
-  
+
+  def destroy
+    Comment.find(params[:id]).destroy
+    redirect_to recipe_path(params[:recipe_id])
+  end
+
   def search_tag
     @tag_list = Tag.all #検索結果画面でもタグ一覧を表示
     @tag = Tag.find(params[:tag_id]) #検索されたタグを受け取る

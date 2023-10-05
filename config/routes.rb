@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => "homes#about"
-    resources :recipes
+    resources :recipes do
+      resources :comments, only: [:create, :destroy]
+    end
     patch 'customers/withdrawal' => "customers#withdrawal"
     get 'customers/confirm_withdrawal' => "customers#confirm_withdrawal"
     resources :customers, only: [:show, :edit, :update]

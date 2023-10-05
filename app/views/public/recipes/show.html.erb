@@ -22,16 +22,23 @@
     <% if @recipe.favorited_by?(current_customer) %>
     <p>
       <%= link_to recipe_bookmarks_path(@recipe), method: :delete do %>
-        <i class="fa-solid fa-clipboard"></i><%= @recipe.bookmarks.count %> 保存
+        <i class="fa-solid fa-clipboard"></i><%= @recipe.bookmarks.count %>
       <% end %>
     </p>
     <% else %>
     <p>
       <%= link_to recipe_bookmarks_path(@recipe), method: :post do %>
-        <i class="fa-regular fa-clipboard"></i><%= @recipe.bookmarks.count %> 保存
+        <i class="fa-regular fa-clipboard"></i><%= @recipe.bookmarks.count %>
       <% end %>
     </p>
-  <% end %>
+    <% end %>
+    <!--フォローボタン-->
+    <% if current_customer.following?(@customer) %>
+      <%= link_to "フォロー外す", customer_relationships_path(@customer.id), method: :delete %>
+    <% else %>
+      <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post %>
+    <% end %>
+  
   </div>
 
   <div class="row">
@@ -41,7 +48,7 @@
   <div class="row">
     コメント件数：<%= @recipe.comments.count %>
   </div>
-  
+
   <div class="row">
     <table>
       <tbody>
@@ -61,7 +68,7 @@
       </tbody>
     </table>
   </div>
-  
+
   <div>
     <%= form_with model: [@recipe, @comment] do |f| %>
       <%= f.text_area :content, rows: '1', placeholder: "コメントをここに" %>

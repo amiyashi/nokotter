@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   # アクション前にconfigure_permitted_parametersメソッドを実行
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+
   def after_sign_in_path_for(resource)
-    bookmarks_path
+    recipe_bookmarks_path(@customer)
   end
-  
+
   def after_sign_out_path_for(resource)
     about_path
   end

@@ -30,6 +30,7 @@ class Public::RecipesController < ApplicationController
     @comment = Comment.new
     @tag_list = @recipe.tags.pluck(:name).join(',')
     @recipe_tags = @recipe.tags
+    @customer = current_customer
   end
 
   def edit

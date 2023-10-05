@@ -4,14 +4,14 @@ Rails.application.routes.draw do
 
   # skipオプション：不要なルーティングを削除
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
-  sessions: "admin/sessions"
-}
+    sessions: "admin/sessions"
+  }
   # 管理者とユーザーで区別
   devise_for :customers,controllers: {
-  sessions: "public/sessions",
-  passwords: 'public/passwords',
-  registrations: 'public/registrations',
-}
+    sessions: "public/sessions",
+    passwords: 'public/passwords',
+    registrations: 'public/registrations',
+  }
 
   # ゲストユーザー
   devise_scope :customer do
@@ -21,16 +21,28 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
-    get 'about' => "homes#about"
-    resources :recipes do
-      resources :comments, only: [:create, :destroy]
-      resource :bookmarks, only: [:index, :create, :destroy]
-      # 1人のユーザーは1つの投稿に対して1回しかいいねできない➝id受け渡し必要ないresource(単数形)
+    resource :homes, only: [] do
+      get :about
     end
-    patch 'customers/withdrawal' => "customers#withdrawal"
-    get 'customers/confirm_withdrawal' => "customers#confirm_withdrawal"
-    resources :customers, only: [:show, :edit, :update]
-    get "search_tag" => "recipes#search_tag"
+
+    resources :recipes do
+      resources :comments, only: %i(create destroy)
+      resource :bookmarks, only: %i(show create destroy)
+      # 1人のユーザーは1つの投稿に対して1回しかいいねできない➝id受け渡し必要ない➝resource(単数形)
+      collection do
+        get :search_tag
+      end
+    end
+
+    resources :customers, only: %i(show, :edit, :update) do
+      resource :relationships, only: %i(create destroy)
+      collection do
+        get :confirm_withdrawal
+        patch :withdrawal
+        get :followings
+        get :followers
+      end
+    end
   end
 
   namespace :admin do

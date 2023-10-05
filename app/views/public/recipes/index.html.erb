@@ -1,62 +1,39 @@
 <div class="container">
-
   <div class="row">
     <p><%= @customer.last_name %> <%= @customer.first_name %>さんのレシピ一覧</p>
   </div>
 
   <div class="row">
-    <div class="col">
-      <!--レシピ追加ボタン-->
-      <%= link_to "レシピを追加する", new_recipe_path, class: "text-decoration-none align-middle" %>
+    <div class="col-md-6">
+      <!-- レシピ追加ボタン -->
+      <%= link_to "レシピを追加する", new_recipe_path, class: "btn btn-primary" %>
     </div>
-    <div class="col">
-      <!--タグ一覧-->
-      <% @tag_list.each do |list|%>
-        <i class="fa-sharp fa-solid fa-tag"></i>
-        <%=link_to list.name,search_tag_path(tag_id: list.id) %>
-        <%="(#{list.recipes.count})" %>
+    <div class="col-md-6">
+      <!-- タグ一覧 -->
+      <% @tag_list.each do |list| %>
+        <i class="fas fa-tag"></i>
+        <%= link_to list.name, search_tag_recipes_path(tag_id: list.id) %>
+        (<%= list.recipes.count %>)
       <% end %>
     </div>
   </div>
 
   <div class="row">
-    <table>
-      <thead>
-        <tr>
-          <th>タイトル</th>
-          <th>レシピ</th>
-          <th>画像</th>
-          <th>保存数</>
-          <th>コメント</th>
-        </tr>
-      </thead>
-      <% @recipes.each do |recipe| %>
-      <tbody>
-        <tr>
-          <td class="align-items-center">
-            <%= link_to recipe_path(recipe) do %>
-              <%= recipe.title %>
-            <% end %>
-          </td>
-          <td class="align-items-center"><%= recipe.description %></td>
-          <td class="align-items-center"><%= image_tag recipe.image, size: "250x150", class: "img-fluid" %></td>
-          <!--<td>-->
-          <!--  <%# if @recipes.favorited_by?(current_customer) %>-->
-          <!--    <%#= link_to recipe_bookmarks_path(@recipe), method: :delete do %>-->
-          <!--      <i class="fa-solid fa-clipboard"></i><%#= @recipe.bookmarks.count %> 保存-->
-          <!--    <%# end %>-->
-          <!--  <%# else %>-->
-          <!--    <%#= link_to recipe_bookmarks_path(@recipe), method: :post do %>-->
-          <!--      <i class="fa-regular fa-clipboard"></i><%#= @recipe.bookmarks.count %> 保存-->
-          <!--    <%# end %>-->
-          <!--  <%# end %>-->
-          <!--</td>-->
-          <td><%= recipe.bookmarks.count %></td>
-          <td><%= link_to "#{recipe.comments.count} コメント", recipe_path(recipe.id) %></td>
-        </tr>
-      </tbody>
-      <% end %>
-    </table>
+    <% @recipes.each do |recipe| %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <!-- 画像を正しく表示する -->
+          <%= image_tag recipe.image, class: "card-img-top", alt: recipe.title %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe) %></h5>
+            <p class="card-text"><%= recipe.description %></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted"><%= recipe.bookmarks.count %> 保存</small>
+            <small class="text-muted"><%= link_to "#{recipe.comments.count} コメント", recipe_path(recipe.id) %></small>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-
 </div>

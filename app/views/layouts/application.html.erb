@@ -18,8 +18,12 @@
           <% if customer_signed_in? %>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/customers/my_page">マイページ</a></li>
-                <li class="breadcrumb-item"><a href="/bookmarks">タイムライン</a></li>
+                <li class="breadcrumb-item">
+                  <%= link_to "マイページ", customer_path(current_customer) %>
+                </li>
+                <li class="breadcrumb-item">
+                  <%= link_to "タイムライン", followings_customers_path %>
+                </li>
                 <li class="breadcrumb-item"><a href="/recipes">レシピ一覧</a></li>
                 <li class="breadcrumb-item"><a href="#">ユーザー一覧</a></li>
                 <li class="breadcrumb-item"><a href="/customers/sign_out", data-method="delete">ログアウト</a></li>

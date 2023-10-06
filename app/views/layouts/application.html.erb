@@ -24,25 +24,40 @@
                 <li class="breadcrumb-item">
                   <%= link_to "タイムライン", followings_customers_path %>
                 </li>
-                <li class="breadcrumb-item"><a href="/recipes">レシピ一覧</a></li>
-                <li class="breadcrumb-item"><a href="#">ユーザー一覧</a></li>
-                <li class="breadcrumb-item"><a href="/customers/sign_out", data-method="delete">ログアウト</a></li>
+                <li class="breadcrumb-item">
+                  <%= link_to "レシピ一覧", recipes_path %>
+                </li>
+                <li class="breadcrumb-item">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+                </li>
               </ol>
             </nav>
           <% elsif admin_signed_in? %>
           　<nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">ユーザー一覧</a></li>
-                <li class="breadcrumb-item"><a href="/admin/sign_out", data-method="delete">ログアウト</a></li>
+                <li class="breadcrumb-item">
+                  <%= link_to "ユーザー一覧", admin_customers_path %>
+                </li>
+                <li class="breadcrumb-item">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+                </li>
               </ol>
             </nav>
           <% else %>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/about">About</a></li>
-                <li class="breadcrumb-item"><%= link_to 'ゲストログイン', public_guest_sign_in_path, method: :post %></li>
-                <li class="breadcrumb-item"><a href="/customers/sign_up">新規登録</a></li>
-                <li class="breadcrumb-item"><a href="/customers/sign_in">ログイン</a></li>
+                <li class="breadcrumb-item">
+                  <%= link_to "About", about_homes_path %>
+                </li>
+                <li class="breadcrumb-item">
+                  <%= link_to 'ゲストログイン', public_guest_sign_in_path, method: :post %>
+                </li>
+                <li class="breadcrumb-item">
+                  <%= link_to "新規登録", new_customer_registration_path %>
+                </li>
+                <li class="breadcrumb-item">
+                  <%= link_to "ログイン", new_customer_session_path %>
+                </li>
               </ol>
             </nav>
           <% end %>

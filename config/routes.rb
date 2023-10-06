@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
-    resource :homes, only: [] do
+    resource :homes, only: %i() do
       get :about
     end
 
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :customers, only: %i(show, :edit, :update) do
+    resources :customers, only: %i(show edit update) do
       resource :relationships, only: %i(create destroy)
       collection do
         get :confirm_withdrawal
@@ -47,7 +47,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "" => "homes#top"
-    resources :customers, only: [:index, :show]
+    resources :customers, only: %i(index show)
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

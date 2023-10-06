@@ -38,6 +38,9 @@
     <% else %>
       <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post %>
     <% end %>
+    <!--投稿者-->
+    <i class="fa-solid fa-circle-user"></i>
+      <%= link_to "投稿者", customer_path(@recipe.customer) %>
 
   </div>
 

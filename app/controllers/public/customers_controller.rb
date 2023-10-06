@@ -1,11 +1,13 @@
 class Public::CustomersController < ApplicationController
+  # ログインしてるユーザーにのみプロフィール見れる
+  # before_action :authenticate_user!
 
   def new
     @customer = Customer.new
   end
 
   def show
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
     # 自分の投稿のみ表示させる
     @recipes = Recipe.where(customer_id: current_customer.id).includes(:customer).order("created_at DESC")
   end

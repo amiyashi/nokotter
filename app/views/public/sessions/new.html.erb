@@ -11,11 +11,11 @@
       <%= render "devise/shared/error_messages", resource: resource %>  
         <div class="field">
           <%= f.label :email %><br />
-          <input type="email" class="form-control" id="exampleFormControlInput1" >
+          <input type="email" class="form-control" id="exampleFormControlInput1", autocomplete: "current-password" >
         </div>
         <div class="field">
           <%= f.label :password %><br />
-          <input type="password" class="form-control" id="exampleFormControlInput1" >
+          <input type="password" class="form-control" id="exampleFormControlInput1", autocomplete: "current-password" >
         </div>
         <% if devise_mapping.rememberable? %>
           <div class="field">

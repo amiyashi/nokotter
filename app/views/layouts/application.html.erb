@@ -13,56 +13,46 @@
 
   <body>
     <header>
-      <div class="container">
-        <div class="row">
-          <% if customer_signed_in? %>
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <%= link_to "マイページ", customer_path(current_customer) %>
-                </li>
-                <!--<li class="breadcrumb-item">-->
-                <!--  <%#= link_to "タイムライン", followings_customer_path %>-->
-                <!--</li>-->
-                <li class="breadcrumb-item">
-                  <%= link_to "レシピ一覧", recipes_path %>
-                </li>
-                <li class="breadcrumb-item">
-                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-                </li>
-              </ol>
-            </nav>
-          <% elsif admin_signed_in? %>
-          　<nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <%= link_to "ユーザー一覧", admin_customers_path %>
-                </li>
-                <li class="breadcrumb-item">
-                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-                </li>
-              </ol>
-            </nav>
-          <% else %>
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <%= link_to "About", about_homes_path %>
-                </li>
-                <li class="breadcrumb-item">
-                  <%= link_to 'ゲストログイン', public_guest_sign_in_path, method: :post %>
-                </li>
-                <li class="breadcrumb-item">
-                  <%= link_to "新規登録", new_customer_registration_path %>
-                </li>
-                <li class="breadcrumb-item">
-                  <%= link_to "ログイン", new_customer_session_path %>
-                </li>
-              </ol>
-            </nav>
-          <% end %>
-        </div>
-      </div>
+      <% if customer_signed_in? %>
+        <nav class="nav">
+          <li class="nav-item">
+            <%= link_to "マイページ", customer_path(current_customer), class: "nav-link active" %>
+          </li>
+          <!--<li class="nav-item">-->
+          <!--  <%#= link_to "タイムライン", followings_customer_path, class: "nav-link active" %>-->
+          <!--</li>-->
+          <li class="nav-item">
+            <%= link_to "レシピ一覧", recipes_path, class: "nav-link active" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link active" %>
+          </li>
+        </nav>
+      <% elsif admin_signed_in? %>
+        <nav class="nav">
+          <li class="nav-item">
+            <%= link_to "ユーザー一覧", admin_customers_path, class: "nav-link active" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link active" %>
+          </li>
+        </nav>
+      <% else %>
+        <nav class="nav">
+          <li class="nav-item">
+            <%= link_to "これはなに？", about_homes_path, class: "nav-link active" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'ゲストログイン', public_guest_sign_in_path, method: :post, class: "nav-link active" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "新規登録", new_customer_registration_path, class: "nav-link active" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログイン", new_customer_session_path, class: "nav-link active" %>
+          </li>
+        </nav>
+      <% end %>
     </header>
 
     <main class="mb-auto">

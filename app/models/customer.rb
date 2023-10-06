@@ -40,6 +40,11 @@ class Customer < ApplicationRecord
     find_or_create_by!(email: 'guest@example.com') do |customer|
       #安全に使用できるパスワードを生成する
       customer.password = SecureRandom.urlsafe_base64
+      customer.first_name = "ト"
+      customer.last_name = "ゲス"
+      customer.first_name_kana = "ト"
+      customer.last_name_kana = "ゲス"
+      customer.birth_date = Date.new(2000, 1, 1)
       # name を入力必須としている場合は， user.name = "ゲスト" なども必要
     end
   end

@@ -1,24 +1,33 @@
-<h2>Log in</h2>
-
-<%= form_with model: @customer, url: customer_session_path do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-8">
+        <%= image_tag('about.jpg', class: "img-fluid") %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    
+    <div class="col-md-4">
+      <h2>ログイン</h2>
+      <%= form_with model: @customer, url: customer_session_path do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>  
+        <div class="field">
+          <%= f.label :email %><br />
+          <input type="email" class="form-control" id="exampleFormControlInput1" >
+        </div>
+        <div class="field">
+          <%= f.label :password %><br />
+          <input type="password" class="form-control" id="exampleFormControlInput1" >
+        </div>
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+        <div class="actions">
+          <%= f.submit "ログイン", class: "btn btn-brown", style: "color: white; background-color: #8B4513;" %>
+        </div>
+      <% end %>
+    </div>
+    
   </div>
-<% end %>
+</div>

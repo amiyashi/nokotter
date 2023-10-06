@@ -1,53 +1,55 @@
-<h2>会員新規登録</h2>
+<div class="container">
+  <div class="row">
 
-<%= form_with model: @customer, url: customer_registration_path do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="col-md-8">
+        <%= image_tag('about.jpg', class: "img-fluid") %>
+    </div>
 
-  <!--必要な入力フォーム追加-->
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :last_name_kana %><br>
-    <%= f.text_field :last_name_kana %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :first_name_kana %><br>
-    <%= f.text_field :first_name_kana %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :birth_date %><br>
-    <%= f.date_select :birth_date, use_month_numbers: true,start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1) %>
-  </div>
+    <div class="col-md-4">
+      <h2>新規登録</h2>
+      <%= form_with model: @customer, url: customer_registration_path do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+        <!--必要な入力フォーム追加-->
+        <div class="field">
+          <%= f.label :last_name %><br>
+          <input type="last_name" class="form-control" id="exampleFormControlInput1" >
+        </div>
+        <div class="field">
+          <%= f.label :first_name %><br>
+          <input type="first_name" class="form-control" id="exampleFormControlInput1" >
+        </div>
+        <div class="field">
+          <%= f.label :last_name_kana %><br>
+          <input type="last_name_kana" class="form-control" id="exampleFormControlInput1" >
+        </div>
+        <div class="field">
+          <%= f.label :first_name_kana %><br>
+          <input type="first_name_kana" class="form-control" id="exampleFormControlInput1" >
+        </div>
+        <div class="field">
+          <%= f.label :birth_date %><br>
+          <%= f.date_select :birth_date, use_month_numbers: true,start_year: 1933, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1) %>
+        </div>
+        <div class="field">
+          <%= f.label :email %><br />
+          <input type="email" class="form-control" id="exampleFormControlInput1" >
+        </div>
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <input type="password" class="form-control" id="exampleFormControlInput1" >
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <input type="password_confirmation" class="form-control" id="exampleFormControlInput1" >
+        </div>
+        <div class="actions" style="margin-top: 15px;">
+          <%= f.submit "新規登録", class: "btn btn-brown", style: "color: white; background-color: #8B4513;" %>
+        </div>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+</div>

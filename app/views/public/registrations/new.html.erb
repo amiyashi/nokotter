@@ -12,19 +12,19 @@
         <!--必要な入力フォーム追加-->
         <div class="field">
           <%= f.label :last_name %><br>
-          <input type="last_name" class="form-control" id="exampleFormControlInput1" >
+          <%= f.text_field :last_name, class: "form-control" %>
         </div>
         <div class="field">
           <%= f.label :first_name %><br>
-          <input type="first_name" class="form-control" id="exampleFormControlInput1" >
+          <%= f.text_field :first_name, class: "form-control" %>
         </div>
         <div class="field">
           <%= f.label :last_name_kana %><br>
-          <input type="last_name_kana" class="form-control" id="exampleFormControlInput1" >
+          <%= f.text_field :last_name_kana, class: "form-control" %>
         </div>
         <div class="field">
           <%= f.label :first_name_kana %><br>
-          <input type="first_name_kana" class="form-control" id="exampleFormControlInput1" >
+          <%= f.text_field :first_name_kana, class: "form-control" %>
         </div>
         <div class="field">
           <%= f.label :birth_date %><br>
@@ -32,18 +32,18 @@
         </div>
         <div class="field">
           <%= f.label :email %><br />
-          <input type="email" class="form-control" id="exampleFormControlInput1" >
+          <%= f.email_field :email, class: "form-control" %>
         </div>
         <div class="field">
           <%= f.label :password %>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
-          <input type="password" class="form-control" id="exampleFormControlInput1" >
+          <%= f.password_field :password, class: "form-control" %>
         </div>
         <div class="field">
           <%= f.label :password_confirmation %><br />
-          <input type="password_confirmation" class="form-control" id="exampleFormControlInput1" >
+          <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
         <div class="actions" style="margin-top: 15px;">
           <%= f.submit "新規登録", class: "btn btn-brown", style: "color: white; background-color: #8B4513;" %>

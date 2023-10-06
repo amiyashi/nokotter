@@ -6,7 +6,8 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = current_customer
-    @recipes = Recipe.all
+    # 自分の投稿のみ表示させる
+    @recipes = Recipe.where(customer_id: current_customer.id).includes(:customer).order("created_at DESC")
   end
 
   def edit
@@ -31,16 +32,16 @@ class Public::CustomersController < ApplicationController
     redirect_to root_path
   end
 
-  # フォロー一覧
-  def followings
-    customer = Customer.find(params[:customer_id])
-    @customers = customer.followings
-  end
-  # フォロワー一覧
-  def followers
-    customer = Customer.find(params[:customer_id])
-    @customers = customer.followers
-  end
+  # # フォロー一覧
+  # def followings
+  #   customer = Customer.find(params[:customer_id])
+  #   @customers = customer.followings
+  # end
+  # # フォロワー一覧
+  # def followers
+  #   customer = Customer.find(params[:customer_id])
+  #   @customers = customer.followers
+  # end
 
   private
 

@@ -9,7 +9,7 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     # 自分の投稿のみ表示させる
-    @recipes = Recipe.where(customer_id: current_customer.id).includes(:customer).order("created_at DESC")
+    @recipes = Recipe.where(customer_id: @customer.id).includes(:customer).order("created_at DESC")
   end
 
   def edit

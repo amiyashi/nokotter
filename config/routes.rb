@@ -35,14 +35,19 @@ Rails.application.routes.draw do
     end
 
     resources :customers, only: %i(show edit update) do
-      resource :relationships, only: %i(create destroy)
+      resource :relationships, only: %i(show create destroy)
+      # idを渡さないとき➝collection
       collection do
         get :confirm_withdrawal
         patch :withdrawal
+      end
+      # idを渡すとき➝member
+      member do
         get :followings
         get :followers
       end
     end
+    
   end
 
   namespace :admin do

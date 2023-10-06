@@ -3,6 +3,17 @@
   <div class="row">
     <p><%= @customer.last_name %><%= @customer.first_name %>さんのマイページ</p>
   </div>
+  <div class="row">
+    <h4>フォロー</h4>
+    <p><%= link_to @customer.followings.count, followings_customer_path(@customer) %></p>
+  </div>
+  <div class="row">
+    <h4>フォロワー</h4>
+    <p><%= link_to @customer.followers.count, followers_customer_path(@customer) %></p>
+  </div>
+  <div class="row">
+    <p><%= render "public/relationships/btn", customer: @customer %></p>
+</div>
 
   <div class="row">
     <h2>マイページ</h2>

@@ -9,13 +9,15 @@ class Customer < ApplicationRecord
   has_many :recipes, dependent: :destroy
 
   # フォローをした、されたの関係
-  # has_many :(アソシエーションが繋がっているテーブル名)、class_name: (実際のモデル名)、foreign_key: (外部キー)
+  # has_many :(アソシエーションが繋がっている)、class_name: (実際のモデル名)、foreign_key: (外部キー)
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   # 一覧画面で使う
-  # has_many :(架空のテーブル名)、source:(実際にデータを取得しにいくテーブル名)
+  # has_many :(好きな命名)、source:(実際にデータを取得しにいく)
+  # フォローしているユーザーの情報
   has_many :followings, through: :relationships, source: :followed
+  # フォローされているユーザーの情報
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
   # フォローするときの処理
@@ -26,7 +28,7 @@ class Customer < ApplicationRecord
   def unfollow(customer_id)
     relationships.find_by(followed_id: customer_id).destroy
   end
-  # フォローしているか判定
+  # 既にフォローしているか判定
   def following?(customer)
     followings.include?(customer)
   end

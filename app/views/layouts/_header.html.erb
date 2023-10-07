@@ -4,9 +4,9 @@
       <li class="nav-item">
         <%= link_to "マイページ", customer_path(current_customer), class: "nav-link text-dark" %>
       </li>
-      <!--<li class="nav-item">-->
-      <!--  <%#= link_to "タイムライン", followings_customer_path, class: "nav-link active" %>-->
-      <!--</li>-->
+      <li class="nav-item">
+        <%= link_to "タイムライン", customer_timeline_index_path(current_customer), class: "nav-link text-dark" %>
+      </li>
       <li class="nav-item">
         <%= link_to "みんなのレシピ", recipes_path, class: "nav-link text-dark" %>
       </li>

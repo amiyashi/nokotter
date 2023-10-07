@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
     resources :customers, only: %i(show edit update) do
       resource :relationships, only: %i(show create destroy)
+      resources :timeline, only: %i(index)
       # idを渡さないとき➝collection
       collection do
         get :confirm_withdrawal
@@ -47,7 +48,7 @@ Rails.application.routes.draw do
         get :followers
       end
     end
-    
+
   end
 
   namespace :admin do

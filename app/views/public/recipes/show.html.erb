@@ -34,8 +34,8 @@
       </div>
     </div>
   </div>
-    
-   
+
+
   <div class="row">
     <!-- タグリスト -->
     <% @recipe_tags.each do |tag| %>
@@ -62,7 +62,7 @@
     <% else %>
       <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post %>
     <% end %>
-    
+
 
   </div>
 

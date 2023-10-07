@@ -1,7 +1,26 @@
-<h3>ランキング</h3>
+<div class="container">
 
-<% @ranks.each do |recipe| %>
-  <%= image_tag recipe.image, class: "card-img-top", alt: recipe.title %>
-  <%= link_to recipe.title, recipe_path(recipe) %>
-  <%= recipe.bookmarks.count %> 保存
-<% end %>
+  <div class="row">
+    <h3>
+      <i class="fa-solid fa-ranking-star" style="margin-right: 10px;"></i>人気ランキング
+    </h3>
+  </div>
+
+  <div class="row">
+    <% @ranks.each.with_index(1) do |recipe, i| %>
+    <div class="col-md-4">
+      <h3>第<%= i %>位</h3>
+      <div>
+        <%= image_tag recipe.image, :size =>'216x216', alt: recipe.title %>
+      </div>
+      <div style="margin-top: 10px;">
+        <h4><%= link_to recipe.title, recipe_path(recipe) %></h4>
+      </div>
+      <h6>
+        保存数<%= recipe.bookmarks.count %>
+      </h6>
+    </div>
+    <% end %>
+  </div>
+
+</div>

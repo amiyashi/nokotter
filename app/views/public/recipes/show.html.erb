@@ -1,37 +1,51 @@
 <div class="container">
+
   <div class="row">
     <div class="col-md-4">
       <%= image_tag @recipe.image, size: "350x250", class: "img-fluid" %>
     </div>
     <div class="col-md-8">
+      <!--タイトル-->
       <div class="row">
-        <div class="col-md-6">
-          <h2><%= @recipe.title %></h2>
-        </div>
-        <div class="col-md-6">
-          <!--ブックマーク表示-->
+        <h2><%= @recipe.title %></h2>
+      </div>
+      <!--ブックマークとコメント数-->
+      <div class="row">
+        <div class="col-md-1">
           <% if @recipe.favorited_by?(current_customer) %>
-          <p>
             <%= link_to recipe_bookmarks_path(@recipe), method: :delete do %>
               <i class="fa-solid fa-clipboard"></i><%= @recipe.bookmarks.count %>
             <% end %>
-          </p>
           <% else %>
-          <p>
             <%= link_to recipe_bookmarks_path(@recipe), method: :post do %>
-              <i class="fa-regular fa-clipboard"></i><%= @recipe.bookmarks.count %>
+            <i class="fa-regular fa-clipboard"></i><%= @recipe.bookmarks.count %>
             <% end %>
-          </p>
           <% end %>
         </div>
+        <div class="col-md-1-offset-10">
+         （コメント：<%= @recipe.comments.count %>件）
+        </div>
       </div>
+      <!--レシピ内容-->
       <div class="row">
         <p><%= @recipe.description %></p>
       </div>
+      <!--投稿者とフォローボタン-->
       <div class="row">
-        <i class="fa-solid fa-circle-user"></i>
-        <%= link_to "作った人", customer_path(@recipe.customer) %>
+        <div class="col-md-2">
+          <i class="fa-solid fa-circle-user"></i>
+          <%= link_to "作った人", customer_path(@recipe.customer) %>
+        </div>
+        <div class="col-md-2-offset-8">
+          <!--フォローボタン-->
+          <% if current_customer.following?(@customer) %>
+            <%= link_to "フォロー外す", customer_relationships_path(@customer.id), method: :delete %>
+          <% else %>
+            <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post %>
+          <% end %>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -42,30 +56,12 @@
       <i class="fa-sharp fa-solid fa-tag"></i>
       <%= link_to tag.name, search_tag_recipes_path(tag_id: tag.id) %>
     <% end %>
-    <!--ブックマーク表示-->
-    <% if @recipe.favorited_by?(current_customer) %>
-    <p>
-      <%= link_to recipe_bookmarks_path(@recipe), method: :delete do %>
-        <i class="fa-solid fa-clipboard"></i><%= @recipe.bookmarks.count %>
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to recipe_bookmarks_path(@recipe), method: :post do %>
-        <i class="fa-regular fa-clipboard"></i><%= @recipe.bookmarks.count %>
-      <% end %>
-    </p>
-    <% end %>
-    <!--フォローボタン-->
-    <% if current_customer.following?(@customer) %>
-      <%= link_to "フォロー外す", customer_relationships_path(@customer.id), method: :delete %>
-    <% else %>
-      <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post %>
-    <% end %>
+
+
 
 
   </div>
-
+  
   <div class="row">
     <p><%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-custom" %></p>
   </div>

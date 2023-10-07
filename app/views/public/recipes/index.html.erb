@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h3>みんなの残り物レシピ一覧</h3>
+      <h3>みんなの残り物レシピ</h3>
     </div>
     <div class="col-md-6">
       <!-- レシピ追加ボタン -->
@@ -21,15 +21,14 @@
   <div class="row">
     <% @recipes.each do |recipe| %>
       <div class="col-md-4">
-        <div class="card mb-4">
-          <!-- 画像を正しく表示する -->
+        <div class="card" style="width: 17rem; margin-bottom: 30px;">
           <%= image_tag recipe.image, class: "card-img-top", alt: recipe.title %>
           <div class="card-body">
             <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe) %></h5>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted"><%= recipe.bookmarks.count %> 保存</small>
-            <small class="text-muted"><%= link_to "#{recipe.comments.count} コメント", recipe_path(recipe.id) %></small>
+            <p class="card-text">
+              <%= recipe.bookmarks.count %> 保存
+              <%= link_to "#{recipe.comments.count} コメント", recipe_path(recipe.id) %>
+            </p>
           </div>
         </div>
       </div>

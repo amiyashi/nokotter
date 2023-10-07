@@ -1,1 +1,12 @@
-<% @recipes.each do |timeline| %>
+<div class="container">
+  <div class="row">
+    <% @recipes.each do |timeline| %>
+    <div class="col">
+      <%= image_tag timeline.image, size: "360x360" %>
+    </div>
+    <div class="col">
+      <h2><%= timeline.title %></h2>
+    </div>
+    <% end %>
+  </div>
+</div>

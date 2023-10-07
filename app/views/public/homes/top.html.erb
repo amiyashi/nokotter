@@ -1,1 +1,7 @@
-<h1>アクセス数ランキング順に表示</h1>
+<h3>ランキング</h3>
+
+<% @ranks.each do |recipe| %>
+  <%= image_tag recipe.image, class: "card-img-top", alt: recipe.title %>
+  <%= link_to recipe.title, recipe_path(recipe) %>
+  <%= recipe.bookmarks.count %> 保存
+<% end %>

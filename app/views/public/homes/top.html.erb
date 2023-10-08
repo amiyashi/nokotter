@@ -1,26 +1,27 @@
 <div class="container">
-
   <div class="row">
-    <h3>
+    <h3 style="padding-bottom: 20px;">
       <i class="fa-solid fa-ranking-star" style="margin-right: 10px;"></i>人気ランキング
     </h3>
   </div>
+</div>
 
-  <div class="row">
+<div class="container-fluid">
+  <div class="card-deck">
     <% @ranks.each.with_index(1) do |recipe, i| %>
-    <div class="col-md-4">
-      <h3>第<%= i %>位</h3>
+    <div class="card align-items-center justify-content-center">
+      <h3 style="padding-top: 20px; padding-bottom: 20px;">第<%= i %>位</h3>
       <div>
-        <%= image_tag recipe.image, :size =>'216x216', alt: recipe.title %>
+        <%= image_tag recipe.image, :size =>'300x300', alt: recipe.title %>
       </div>
       <div style="margin-top: 10px;">
         <h4><%= link_to recipe.title, recipe_path(recipe) %></h4>
       </div>
       <h6>
-        保存数<%= recipe.bookmarks.count %>
+        保存数：<%= recipe.bookmarks.count %> 件
+        コメント数：<%= recipe.comments.count %> 件
       </h6>
     </div>
     <% end %>
   </div>
-
 </div>

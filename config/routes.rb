@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  # devise_for :customers
-  # devise_for :end_users
-
   # skipオプション：不要なルーティングを削除
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
@@ -12,19 +9,16 @@ Rails.application.routes.draw do
     passwords: 'public/passwords',
     registrations: 'public/registrations',
   }
-
   # ゲストユーザー
   devise_scope :customer do
     post 'public/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
-
-
+  
   scope module: :public do
     root to: 'homes#top'
     resource :homes, only: %i() do
       get :about
     end
-
     resources :recipes do
       resources :comments, only: %i(create destroy)
       resource :bookmarks, only: %i(show create destroy)
@@ -34,7 +28,6 @@ Rails.application.routes.draw do
         get :search_tag
       end
     end
-
     resources :customers, only: %i(show edit update) do
       resource :relationships, only: %i(show create destroy)
       resources :timeline, only: %i(index)
@@ -49,13 +42,11 @@ Rails.application.routes.draw do
         get :followers
       end
     end
-
   end
 
   namespace :admin do
     get "" => "homes#top"
     resources :customers, only: %i(index show)
   end
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
 end

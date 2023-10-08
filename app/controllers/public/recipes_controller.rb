@@ -1,6 +1,5 @@
 class Public::RecipesController < ApplicationController
   def index
-    #@recipes = Recipe.all
     @customer = current_customer
     @tag_list = Tag.all
     @q = Recipe.ransack(params[:q])
@@ -17,7 +16,6 @@ class Public::RecipesController < ApplicationController
     # 受け取った値を,で区切って配列にする
     tag_list = params[:recipe][:name].split(',')
     if @recipe.save
-      # save_tagsはモデルで定義する
       @recipe.save_tags(tag_list)
       flash[:notice] = "投稿が完了しました。"
       redirect_to recipe_path(@recipe.id)
@@ -59,9 +57,9 @@ class Public::RecipesController < ApplicationController
   end
 
   def search_tag
-    @tag_list = Tag.all #検索結果画面でもタグ一覧を表示
-    @tag = Tag.find(params[:tag_id]) #検索されたタグを受け取る
-    @recipes = @tag.recipes #検索されたタグに紐づく投稿を表示
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @recipes = @tag.recipes
   end
 
   private

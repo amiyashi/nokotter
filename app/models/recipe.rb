@@ -13,26 +13,27 @@ class Recipe < ApplicationRecord
     current_tags = self.tags.pluck(:name) unless self.tags.nil? # タグが存在していれば、タグの名前を配列として全て取得
     old_tags = current_tags - tags # 現在取得したタグから、送られてきたタグを除く
     new_tags = tags - current_tags # 送信されてきたタグから、現在存在するタグを除く
-
     # 古いタグを消す
     old_tags.each do |old_name|
       self.tags.delete Tag.find_by(name:old_name)
     end
-    # 新しいタグを保存
+    # 新しいタグを保存する
     new_tags.each do |new_name|
       tag = Tag.find_or_create_by(name:new_name)
       self.tags << tag
     end
   end
-
   # ブックマーク機能
-  # 引数で渡されたidがBookmarksテーブルに存在（exists?）するか
+  # 引数で渡されたcustomer_idがBookmarksテーブルに存在するか
   def favorited_by?(customer)
     bookmarks.exists?(customer_id: customer.id)
   end
-
+  # 検索機能
   def self.ransackable_attributes(auth_object = nil)
     ["title"]
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    ["tags"]
+  end
 end

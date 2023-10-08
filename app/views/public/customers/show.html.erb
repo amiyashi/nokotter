@@ -3,9 +3,9 @@
   <div class="row">
     <p><%= @customer.last_name %><%= @customer.first_name %>さんのマイページ</p>
   </div>
-  <div class="row">
-    <p><%= image_tag @customer.get_profile_image(100,100) %></p>
-  </div>
+  <!--<div class="row">-->
+  <!--  <p><%#= image_tag @customer.get_profile_image(100,100) %></p>-->
+  <!--</div>-->
   <div class="row">
     <h4>フォロー</h4>
     <p><%= link_to @customer.followings.count, followings_customer_path %></p>

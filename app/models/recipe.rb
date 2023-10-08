@@ -31,4 +31,8 @@ class Recipe < ApplicationRecord
     bookmarks.exists?(customer_id: customer.id)
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["title"]
+  end
+
 end

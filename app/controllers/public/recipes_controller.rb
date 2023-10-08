@@ -1,8 +1,10 @@
 class Public::RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all
+    #@recipes = Recipe.all
     @customer = current_customer
     @tag_list = Tag.all
+    @q = Recipe.ransack(params[:q])
+    @recipes = @q.result(distinct: true).includes(:customer).order(created_at: :desc)
   end
 
   def new

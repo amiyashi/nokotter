@@ -1,4 +1,16 @@
 <div class="container">
+
+  <div class="row">
+    <p>記事検索</p>
+      <%= search_form_for @q do |f| %>
+        <%= f.label :title, "タイトル" %>
+        <%= f.search_field :title_cont %>
+        <%#= f.search_field :title_or_description_cont, class: 'form-control', placeholder: '検索ワード' %>
+        <%# f.search_field :description_cont, placeholder: '記事の内容' %>
+        <%= f.submit '検索', class: 'btn btn-primary' %>
+      <% end %>
+  </div>
+
   <div class="row">
     <div class="col-md-6">
       <h3>みんなの残り物レシピ</h3>
@@ -10,12 +22,12 @@
   </div>
 
   <div class="row">
-      <!-- タグ一覧 -->
-      <% @tag_list.each do |list| %>
-        <i class="fas fa-tag"></i>
-        <%= link_to list.name, search_tag_recipes_path(tag_id: list.id) %>
-        (<%= list.recipes.count %>)
-      <% end %>
+    <!-- タグ一覧 -->
+    <% @tag_list.each do |list| %>
+      <i class="fas fa-tag"></i>
+      <%= link_to list.name, search_tag_recipes_path(tag_id: list.id) %>
+      (<%= list.recipes.count %>)
+    <% end %>
   </div>
 
   <div class="row">
@@ -34,4 +46,5 @@
       </div>
     <% end %>
   </div>
+
 </div>

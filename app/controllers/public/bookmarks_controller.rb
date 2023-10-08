@@ -1,6 +1,9 @@
 class Public::BookmarksController < ApplicationController
 
   def show
+     # ブックマーク一覧
+    bookmark = Bookmark.where(customer_id: current_customer.id).pluck(:recipe_id)
+    @bookmark_list = Recipe.find(bookmark)
   end
 
   def create

@@ -1,1 +1,6 @@
-ブックマーク一覧
+<% if @bookmark_list.present? %>
+  <% @bookmark_list.each do |recipe| %>
+    <%= recipe.title %>
+    <%= image_tag recipe.image %>
+    <% end %>
+<% end %>

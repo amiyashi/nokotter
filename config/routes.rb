@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :recipes do
       resources :comments, only: %i(create destroy)
       resource :bookmarks, only: %i(show create destroy)
+      # resourceはindex使えない➝showで表示させる
       # 1人のユーザーは1つの投稿に対して1回しかいいねできない➝id受け渡し必要ない➝resource(単数形)
       collection do
         get :search_tag

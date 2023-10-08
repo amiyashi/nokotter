@@ -10,6 +10,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     # 該当する人の投稿のみ表示させる
     @recipes = Recipe.where(customer_id: @customer.id).includes(:customer).order("created_at DESC")
+    # フォローフォロワー
     @following_customers = @customer.followings
     @follower_customers = @customer.followers
   end

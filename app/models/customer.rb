@@ -19,6 +19,8 @@ class Customer < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   # フォローされているユーザーの情報
   has_many :followers, through: :reverse_of_relationships, source: :follower
+  # プロフィール画像に関する記述
+  has_one_attached :profile_image
 
   # フォローするときの処理
   def follow(customer_id)
@@ -33,8 +35,6 @@ class Customer < ApplicationRecord
     followings.include?(customer)
   end
 
-
-
   def self.guest
     #'guest@example.com'に一致するレコードをDBから探し、見つからなかった場合に新しいレコードを作成
     find_or_create_by!(email: 'guest@example.com') do |customer|
@@ -47,6 +47,14 @@ class Customer < ApplicationRecord
       customer.birth_date = Date.new(2000, 1, 1)
       # name を入力必須としている場合は， user.name = "ゲスト" なども必要
     end
+  end
+  # プロフィール画像に関する記述
+  def get_profile_image(width, height)
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/profile.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'test-image.jpg', content_type: 'image/jpeg')
+    end
+    profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
 end

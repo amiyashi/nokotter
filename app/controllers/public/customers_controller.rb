@@ -38,19 +38,19 @@ class Public::CustomersController < ApplicationController
 
   # フォロー一覧
   def followings
-    customer = Customer.find(params[:customer_id])
+    customer = Customer.find(params[:id])
     @customers = customer.followings
   end
   # フォロワー一覧
   def followers
-    customer = Customer.find(params[:customer_id])
+    customer = Customer.find(params[:id])
     @customers = customer.followers
   end
 
   private
 
   def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :birth_date)
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :birth_date, :customer_id)
   end
 
 end

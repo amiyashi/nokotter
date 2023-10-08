@@ -1,11 +1,11 @@
 class Public::RelationshipsController < ApplicationController
   before_action :authenticate_customer!
-  # フォローするとき
+  
   def show
     customer = Customer.find(params[:customer_id])
     @customers = customer.followings
   end
-  
+  # フォローするとき
   def create
     current_customer.follow(params[:customer_id])
     redirect_to request.referer
@@ -15,14 +15,14 @@ class Public::RelationshipsController < ApplicationController
     current_customer.unfollow(params[:customer_id])
     redirect_to request.referer
   end
-  # フォロー一覧
-  def follower
-    customer = Customer.find(params[:customer_id])
-    @customers = customer.followings
-  end
-  # フォロワー一覧
-  def followed
-    customer = Customer.find(params[:customer_id])
-    @customers = customer.followers
-  end
+  # # フォロー一覧
+  # def follower
+  #   customer = Customer.find(params[:customer_id])
+  #   @customers = customer.followings
+  # end
+  # # フォロワー一覧
+  # def followed
+  #   customer = Customer.find(params[:customer_id])
+  #   @customers = customer.followers
+  # end
 end

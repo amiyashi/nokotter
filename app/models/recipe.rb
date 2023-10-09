@@ -5,8 +5,12 @@ class Recipe < ApplicationRecord
   # 2つのモデル間の関連がrecipe_tag_relationsモデルを通じて行われる
   has_many :tags, through: :recipe_tag_relations
   belongs_to :customer
-  # ActiveStorage導入
+
   has_one_attached :image
+
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :image, presence: true
 
   # タグ機能
   def save_tags(tags)

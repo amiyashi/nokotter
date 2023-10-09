@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   devise_scope :customer do
     post 'public/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
-  
+
   scope module: :public do
     root to: 'homes#top'
     resource :homes, only: %i() do
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "" => "homes#top"
-    resources :customers, only: %i(index show)
+    resources :customers, only: %i(index show edit update)
   end
-  
+
 end

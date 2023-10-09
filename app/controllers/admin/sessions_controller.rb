@@ -5,7 +5,7 @@ class Admin::SessionsController < Devise::SessionsController
 # 管理者のログイン後ページ遷移とログアウト先
 protected
   def after_sign_in_path_for(resource)
-    admin_path
+    admin_customers_path
   end
 
   def after_sign_out_path_for(resource)

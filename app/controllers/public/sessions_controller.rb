@@ -10,6 +10,17 @@ class Public::SessionsController < Devise::SessionsController
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
+  def customer_state
+    @customer = Customer.find_by(email: params[:customer][:email])
+    return if !@customer
+    if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == true)
+      flash[:notice] = "退会済みです。再度ご登録お願いします。"
+      redirect_to new_customer_registration_path
+    else
+      flash[:notice] = "該当するユーザーが見つかりません"
+    end
+  end
+
   # GET /resource/sign_in
   # def new
   #   super

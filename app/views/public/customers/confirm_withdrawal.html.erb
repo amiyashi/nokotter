@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col text-center my-5">
+      <h4><b>本当に退会しますか？</b></h4>
+
+      <p>退会すると、会員情報や<br>
+      これまでのレシピ投稿が閲覧できなくなります。<br>
+      退会する場合は、「退会する」をクリックしてください
+      </p>
+
+      <%= link_to "退会しない", customer_path(current_customer), class: "btn btn-outline-secondary" %>
+      <%= link_to "退会する", withdrawal_customers_path(current_customer), method: :patch, class: "btn btn-outline-danger", data: { confirm: "本当に退会しますか？" } %>
+    </div>
+  </div>
+</div>

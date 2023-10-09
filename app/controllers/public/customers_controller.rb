@@ -30,9 +30,9 @@ class Public::CustomersController < ApplicationController
     end
   end
 
-  def confirm_withdrawal
-    @customer = current_customer
-  end
+  # def confirm_withdrawal
+  #   @customer = current_customer
+  # end
 
   def withdrawal
     @customer = current_customer

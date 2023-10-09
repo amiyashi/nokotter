@@ -13,6 +13,8 @@ class Public::CustomersController < ApplicationController
     # フォローフォロワー
     @following_customers = @customer.followings
     @follower_customers = @customer.followers
+    bookmark = Bookmark.where(customer_id: current_customer.id).pluck(:recipe_id)
+    @bookmark_list = Recipe.find(bookmark)
   end
 
   def edit

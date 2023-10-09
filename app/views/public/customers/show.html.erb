@@ -8,7 +8,7 @@
       <a class="nav-link" data-toggle="tab" href="#section2">保存済みレシピ</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#section3">プロフィール編集</a>
+      <a class="nav-link" data-toggle="tab" href="#section3">プロフィール</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#section4">フォロー/フォロワー</a>
@@ -42,42 +42,59 @@
         </tbody>
       </table>
     </div>
+
     <div id="section2" class="tab-pane fade">
-      <% if @bookmark_list.present? %>
-        <% @bookmark_list.each do |recipe| %>
-          <li>
-            <%= image_tag recipe.image %>
-            <%#= recipe.title %>
-          </li>
-        <% end %>
-      <% end %>
+      <div class="texts-wrapper">
+        <div class="contents-title text-center">
+          <div class="row">
+          <% if @bookmark_list.present? %>
+            <% @bookmark_list.each do |recipe| %>
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card">
+                <%= image_tag recipe.image %>
+                  <div class="card-body">
+                    <p class="card-title"><%= recipe.title %></p>
+                  </div>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      </div>
     </div>
+
     <div id="section3" class="tab-pane fade">
-      <table class="table">
-        <tr>
-          <th class="table-active">氏名</th>
-          <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-        </tr>
-        <tr>
-          <th class="table-active">フリガナ</th>
-          <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
-        </tr>
-        <tr>
-          <th class="table-active">メールアドレス</th>
-          <td><%= @customer.email %></td>
-        </tr>
-        <tr>
-          <th class="table-active">生年月日</th>
-          <td><%= @customer.birth_date %></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td>
-            <%= link_to '編集する', edit_customer_path(current_customer), class:"btn btn-success my-1 mx-4 px-4" %>
-          </td>
-        </tr>
-      </table>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+          <div class="d-flex align-items-center">
+            <h4 class="my-3 ml-4">登録情報</h4>
+            <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-outline-secondary ml-4 mb-2" %>
+          </div>
+
+          <table class="table table-bordered w-75">
+            <tr>
+              <td style="width: 20%", class="bg-light">名前</td>
+              <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">フリガナ</td>
+              <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">メールアドレス</td>
+              <td><%= @customer.email %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">生年月日</td>
+              <td><%= @customer.birth_date %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
+
     <div id="section4" class="tab-pane fade">
       <h4>フォロー</h4>
       <p><%= link_to @customer.followings.count, followings_customer_path %></p>
@@ -85,6 +102,7 @@
       <p><%= link_to @customer.followers.count, followers_customer_path %></p>
     </div>
   </div>
+
 </div>
 
 

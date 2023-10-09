@@ -1,0 +1,9 @@
+<% if recipe.favorited_by?(current_customer) %>
+  <%= link_to recipe_bookmarks_path(recipe), method: :delete, remote: true, data: {"turbolinks" => false} do %>
+    <i class="fa-solid fa-clipboard"></i><%= recipe.bookmarks.count %>
+  <% end %>
+<% else %>
+  <%= link_to recipe_bookmarks_path(recipe), method: :post, remote: true, data: {"turbolinks" => false} do %>
+  <i class="fa-regular fa-clipboard"></i><%= recipe.bookmarks.count %>
+  <% end %>
+<% end %>

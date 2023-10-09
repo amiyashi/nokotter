@@ -1,77 +1,94 @@
-<div class="container">
-  <!-- ユーザーの詳細 -->
-  <div class="row">
-    <p><%= @customer.last_name %><%= @customer.first_name %>さんのマイページ</p>
-  </div>
-  <!--<div class="row">-->
-  <!--  <p><%#= image_tag @customer.get_profile_image(100,100) %></p>-->
-  <!--</div>-->
-  <div class="row">
-    <h4>フォロー</h4>
-    <p><%= link_to @customer.followings.count, followings_customer_path %></p>
-  </div>
-  <div class="row">
-    <h4>フォロワー</h4>
-    <p><%= link_to @customer.followers.count, followers_customer_path %></p>
-  </div>
-  <div class="row">
-    <p><%= render "public/relationships/btn", customer: @customer %></p>
-  </div>
+<p><%= @customer.last_name %><%= @customer.first_name %>さんのマイページ</p>
+<div class="tabs">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#section1">投稿済みレシピ</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#section2">保存済みレシピ</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#section3">プロフィール編集</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#section4">フォロー/フォロワー</a>
+    </li>
+  </ul>
 
-  <div class="row">
-    <h2>マイページ</h2>
-  </div>
-
-  <div class="row">
-    <table class="table">
-      <tr>
-        <th class="table-active">氏名</th>
-        <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-      </tr>
-      <tr>
-        <th class="table-active">フリガナ</th>
-        <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
-      </tr>
-      <tr>
-        <th class="table-active">メールアドレス</th>
-        <td><%= @customer.email %></td>
-      </tr>
-      <tr>
-        <th class="table-active">生年月日</th>
-        <td><%= @customer.birth_date %></td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="row">
-    <%= link_to '編集する', edit_customer_path(current_customer), class:"btn btn-success my-1 mx-4 px-4" %>
-　</div>
-
-　<!-- ユーザーの投稿一覧 -->
-　<div class="row">
-　  <table class="table">
-　    <thead class="table-active">
+  <div class="tab-content">
+    <div id="section1" class="tab-pane fade show active">
+      <table class="table">
+  　     <thead class="table-active">
+          <tr>
+            <th></th>
+            <th>タイトル</th>
+            <th>レシピ</th>
+            <th>コメント数</th>
+          </tr>
+        </thead>
+        <tbody>
+    　   <% @recipes.each do |recipe| %>
+    　     </tr>
+    　       <td class="align-items-center"><%= image_tag recipe.image, size: "250x150", class: "img-fluid" %></td>
+            <td class="align-items-center">
+              <%= link_to recipe_path(recipe) do %>
+                <%= recipe.title %>
+              <% end %>
+            </td>
+            <td class="align-items-center"><%= recipe.description %></td>
+            <td><%= link_to "#{recipe.comments.count} コメント", recipe_path(recipe.id) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div id="section2" class="tab-pane fade">
+      <% if @bookmark_list.present? %>
+        <% @bookmark_list.each do |recipe| %>
+          <li>
+            <%= image_tag recipe.image %>
+            <%#= recipe.title %>
+          </li>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="section3" class="tab-pane fade">
+      <table class="table">
+        <tr>
+          <th class="table-active">氏名</th>
+          <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+        </tr>
+        <tr>
+          <th class="table-active">フリガナ</th>
+          <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+        </tr>
+        <tr>
+          <th class="table-active">メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <th class="table-active">生年月日</th>
+          <td><%= @customer.birth_date %></td>
+        </tr>
         <tr>
           <th></th>
-          <th>タイトル</th>
-          <th>レシピ</th>
-        </tr>
-      </thead>
-      <tbody>
-  　   <% @recipes.each do |recipe| %>
-  　     </tr>
-          <td class="align-items-center">
-            <%= link_to recipe_path(recipe) do %>
-              <%= recipe.title %>
-            <% end %>
+          <td>
+            <%= link_to '編集する', edit_customer_path(current_customer), class:"btn btn-success my-1 mx-4 px-4" %>
           </td>
-          <td class="align-items-center"><%= recipe.description %></td>
-          <td class="align-items-center"><%= image_tag recipe.image, size: "250x150", class: "img-fluid" %></td>
-          <td><%= link_to "#{recipe.comments.count} コメント", recipe_path(recipe.id) %></td>
         </tr>
-      <% end %>
-      </tbody>
-    </table>
+      </table>
+    </div>
+    <div id="section4" class="tab-pane fade">
+      <h4>フォロー</h4>
+      <p><%= link_to @customer.followings.count, followings_customer_path %></p>
+      <h4>フォロワー</h4>
+      <p><%= link_to @customer.followers.count, followers_customer_path %></p>
+    </div>
   </div>
-
 </div>
+
+
+
+
+
+

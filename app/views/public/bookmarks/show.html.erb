@@ -1,6 +1,14 @@
-<% if @bookmark_list.present? %>
-  <% @bookmark_list.each do |recipe| %>
-    <%= recipe.title %>
-    <%= image_tag recipe.image %>
+<h2>保存済みレシピ</h2>
+
+<div class="slider-container">
+<ul class="slider">
+  <% if @bookmark_list.present? %>
+    <% @bookmark_list.each do |recipe| %>
+      <li>
+        <%= image_tag recipe.image %>
+        <%#= recipe.title %>
+      </li>
     <% end %>
-<% end %>
+  <% end %>
+</ul>
+</div>

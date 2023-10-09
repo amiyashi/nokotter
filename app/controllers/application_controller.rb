@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # アクション前にconfigure_permitted_parametersメソッドを実行
+  before_action :authenticate_customer!, except: [:top, :about]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)

@@ -8,4 +8,7 @@
 
 
 #ログイン条件➝rails db:seedコマンド
-Admin.create!(email: 'admin@.com', password: '12345')
+Admin.create!(
+   email: 'admin@example.com',
+   password: '123456'
+)

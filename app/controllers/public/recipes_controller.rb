@@ -1,4 +1,6 @@
 class Public::RecipesController < ApplicationController
+  before_action :check_customer, only: [:edit]
+
   def index
     @customer = current_customer
     @tag_list = Tag.all
@@ -8,9 +10,11 @@ class Public::RecipesController < ApplicationController
 
   def new
     @recipes = Recipe.all
+    @recipe = Recipe.new
   end
 
   def create
+    @recipes = Recipe.all
     @recipe = Recipe.new(recipe_params)
     @recipe.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にする
@@ -64,6 +68,12 @@ class Public::RecipesController < ApplicationController
   private
   def recipe_params
     params.require(:recipe).permit(:image, :title, :description, :customer_id)
+  end
+
+  def check_customer
+    unless current_customer == @customer
+    redirect_to root_path, alert: "他のユーザーのマイページにはアクセスできません。"
+    end
   end
 
 end

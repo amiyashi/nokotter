@@ -62,35 +62,36 @@
       <div class="container">
         <div class="row">
           <div class="col">
-          <div class="d-flex align-items-center">
-            <h4 class="my-3 ml-4">登録情報</h4>
-            <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-outline-secondary ml-4 mb-2" %>
+            <div class="d-flex align-items-center">
+              <h4 class="my-3 ml-4">登録情報</h4>
+              <% if @recipe.customer == current_customer %>
+                <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-outline-secondary ml-4 mb-2" %>
+              <% end %>
+            </div>
+            <table class="table table-bordered w-75">
+              <tr>
+                <td style="width: 20%", class="bg-light">ユーザーネーム</td>
+                <td><%= @customer.nickname %></td>
+              </tr>
+              <tr>
+                <td class="bg-light">メールアドレス</td>
+                <td><%= @customer.email %></td>
+              </tr>
+              <tr>
+                <td class="bg-light">生年月日</td>
+                <td><%= @customer.birth_date %></td>
+              </tr>
+            </table>
           </div>
-
-          <table class="table table-bordered w-75">
-            <tr>
-              <td style="width: 20%", class="bg-light">ユーザーネーム</td>
-              <td><%= @customer.nickname %></td>
-            </tr>
-            <tr>
-              <td class="bg-light">メールアドレス</td>
-              <td><%= @customer.email %></td>
-            </tr>
-            <tr>
-              <td class="bg-light">生年月日</td>
-              <td><%= @customer.birth_date %></td>
-            </tr>
-          </table>
         </div>
       </div>
     </div>
-  </div>
 
     <div id="section4" class="tab-pane fade">
       <h4>フォロー</h4>
-      <p><%= link_to @customer.followings.count, followings_customer_path %></p>
+        <p><%= link_to @customer.followings.count, followings_customer_path %></p>
       <h4>フォロワー</h4>
-      <p><%= link_to @customer.followers.count, followers_customer_path %></p>
+        <p><%= link_to @customer.followers.count, followers_customer_path %></p>
     </div>
   </div>
 

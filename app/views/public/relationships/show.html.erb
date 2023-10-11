@@ -3,22 +3,19 @@
   <nav class="nav nav-pills flex-column">
     <p class="nav-link" href="フォロー">フォロー</p>
     <nav class="nav nav-pills flex-column">
-        <% if @customers.exists? %>
-  
-              <% @customers.each do |customer| %>
-                  <!--<td><%#= image_tag user.get_profile_image, size: '50x50' %></td>-->
-                  <p><%= customer.last_name %><%= customer.first_name %></p>
-                  <p>フォロー数: <%= customer.followings.count %></p>
-                  <p>フォロワー数: <%= customer.followers.count %></p>
-                  <!--<td><%#= render "relationships/btn", customer: @customer %></td>-->
-                  <p><%= link_to "Show", customer %></p>
-              <% end %>
-        <% else %>
-          <p>ユーザーはいません</p>
+      <% if @customers.exists? %>
+        <% @customers.each do |customer| %>
+            <!--<td><%#= image_tag user.get_profile_image, size: '50x50' %></td>-->
+            <p><%= customer.last_name %><%= customer.first_name %></p>
+            <p>フォロー数: <%= customer.followings.count %></p>
+            <p>フォロワー数: <%= customer.followers.count %></p>
+            <!--<td><%#= render "relationships/btn", customer: @customer %></td>-->
+            <p><%= link_to "Show", customer %></p>
         <% end %>
-      </p>
+      <% else %>
+        <p>ユーザーはいません</p>
+      <% end %>
     </nav>
-    
     <p class="nav-link">フォロワー</p>
     <nav class="nav nav-pills flex-column">
       <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>

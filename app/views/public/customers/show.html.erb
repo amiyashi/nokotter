@@ -24,7 +24,7 @@
             <div class="card">
               <%= image_tag recipe.image, class: "img-fluid" %>
               <div class="card-body text-center">
-                <p class="card-text" >
+                <p class="card-text">
                   <%= link_to recipe_path(recipe) do %>
                     <%= recipe.title %>
                   <% end %>
@@ -38,22 +38,24 @@
     </div>
 
     <div id="section2" class="tab-pane fade">
-      <div class="texts-wrapper">
-        <div class="contents-title text-center">
-          <div class="row">
+      <div class="container">
+        <div class="row">
           <% if @bookmark_list.present? %>
             <% @bookmark_list.each do |recipe| %>
-            <div class="col-12 col-md-6 col-lg-4">
+            <div class="col-md-4  mb-5 mt-5">
               <div class="card">
-                <%= image_tag recipe.image %>
-                  <div class="card-body">
-                    <p class="card-title"><%= recipe.title %></p>
-                  </div>
+                <%= image_tag recipe.image, class: "img-fluid" %>
+                <div class="card-body text-center">
+                  <p class="card-title">
+                    <%= link_to recipe_path(recipe) do %>
+                      <%= recipe.title %>
+                    <% end %>
+                  </p>
+                </div>
               </div>
             </div>
             <% end %>
           <% end %>
-          </div>
         </div>
       </div>
     </div>
@@ -96,9 +98,3 @@
   </div>
 
 </div>
-
-
-
-
-
-

@@ -1,43 +1,48 @@
 <div class="container">
 
   <div class="row">
-    <h2>レシピを追加しよう</h2>
+    <h2>作り方</h2>
   </div>
 
   <div class="row">
-    <%= form_with model: @recipe, url: recipes_path, local: true do |f| %>
-    <table>
-        <tr>
-          <div class="form-group">
-            <th>画像</th>
-            <td><%= f.file_field :image, accept: "image/*" %></td>
-          </div>
-        </tr>
-        <tr>
-          <div class="form-group">
-            <th>タイトル</th>
-            <td><%= f.text_field :title, placeholder:"(例)ピーマンの甘煮" %></td>
-          </div>
-        </tr>
-        <tr>
-          <div class="form-group">
+    <div class="col-md-2">
+      <%= form_with model: @recipe, url: recipes_path, remote: true do |f| %>
+      <div class="field">
+        <%= f.label :タイトル %><br>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :完成イメージ %><br>
+        <%= f.file_field :image, accept: "image/*", size: "80x80" %>
+      </div>
+      <div class="field">
+        <%= f.label :レシピ %><br>
+        <%= f.text_area :description, size: "40x2", id: "description" %>
+      </div>
+      <div class="field">
+        <%= f.label :タグ※複数個入力できます %><br>
+        <%= f.text_field :name, value: @tag_list, class: 'form-control' %>
+      </div>
+      <div class="form-action">
+        <%= f.submit "レシピの追加", class: "btn btn-success" %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-10">
+      <table>
+        <thead>
+          <tr>
+            <th>完成イメージ</th>
+            <th>料理名</th>
+            <th>タグ</th>
             <th>レシピ</th>
-            <td><%= f.text_area :description, size: "50x5", placeholder:"(例)【手順1】ピーマンを縦半分にカットします。" %></td>
-          </div>
-        </tr>
-        <tr>
-          <div class="form-group">
-            <th>タグ(,で区切ると複数タグ登録できます)</th>
-            <td><%= f.text_field :name,value: @tag_list, class: 'form-control' %></td>
-          </div>
-        </tr>
-        <tr>
-          <div class="form-action">
-            <th><%= f.submit "レシピの追加", class: "btn btn-success" %></th>
-          </div>
-        </tr>
+          </tr>
+        </thead>
+        <tbody id="recipe">
+          <%= render 'public/recipes/new_recipe', recipes: @recipes %>
+        </tbody>
       </table>
-    <% end %>
-  </div>
+    </div>
 
 </div>

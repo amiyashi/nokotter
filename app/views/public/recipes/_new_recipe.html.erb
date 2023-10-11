@@ -1,0 +1,8 @@
+<% recipes.each do |recipe| %>
+<tr>
+  <td><%= image_tag recipe.image, size: "80x80" %></td>
+  <td><%= recipe.title %></td>
+  <td><%= recipe.tags.name %></td>
+  <td><%= recipe.description %></td>
+</tr>
+<% end %>

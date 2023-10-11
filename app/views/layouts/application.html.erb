@@ -13,8 +13,13 @@
 
   <body>
     <%= render 'layouts/header' %>
-    <main class="mb-auto">
-      <%= flash[:notice] %>
+    <main>
+      <% if flash[:notice] %>
+        <p class="alert alert-primary mb-0"><%= flash[:notice] %></p>
+      <% end %>
+      <% if flash[:alert] %>
+        <p class="alert alert-dark mb-0"><%= flash.now[:alert] %></p>
+      <% end %>
       <%= yield %>
     </main>
     <%= render 'layouts/footer' %>

@@ -7,7 +7,7 @@ class Public::RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new
+    @recipes = Recipe.all
   end
 
   def create
@@ -18,7 +18,6 @@ class Public::RecipesController < ApplicationController
     if @recipe.save
       @recipe.save_tags(tag_list)
       flash[:notice] = "投稿が完了しました。"
-      redirect_to recipe_path(@recipe.id)
     else
       flash[:notice] = "投稿内容に不備があります。"
       render :new

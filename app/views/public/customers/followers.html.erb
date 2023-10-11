@@ -3,7 +3,7 @@
   <% @customers.each do |customer| %>
     <tr>
       <!--<td><%#= attachment_image_tag user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg" , size:"40x40" %></td>-->
-      <td><%= customer.last_name %><%= customer.first_name %></td>
+      <td><%= customer.nickname %></td>
       <td>フォロー数：<%= customer.followings.count %></td>
       <td>フォロワー数：<%= customer.followers.count %></td>
       <td><%= link_to "show", customer_path(customer.id) %> </td>

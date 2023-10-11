@@ -1,4 +1,4 @@
-<p><%= @customer.last_name %><%= @customer.first_name %>さんのマイページ</p>
+<p><%= @customer.nickname %>さんのマイページ</p>
 <div class="tabs">
   <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -17,30 +17,24 @@
 
   <div class="tab-content">
     <div id="section1" class="tab-pane fade show active">
-      <table class="table">
-  　     <thead class="table-active">
-          <tr>
-            <th></th>
-            <th>タイトル</th>
-            <th>レシピ</th>
-            <th>コメント数</th>
-          </tr>
-        </thead>
-        <tbody>
-    　   <% @recipes.each do |recipe| %>
-    　     </tr>
-    　       <td class="align-items-center"><%= image_tag recipe.image, size: "250x150", class: "img-fluid" %></td>
-            <td class="align-items-center">
-              <%= link_to recipe_path(recipe) do %>
-                <%= recipe.title %>
-              <% end %>
-            </td>
-            <td class="align-items-center"><%= recipe.description %></td>
-            <td><%= link_to "#{recipe.comments.count} コメント", recipe_path(recipe.id) %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+      <div class="container">
+        <div class="row">
+          <% @recipes.each do |recipe| %>
+          <div class="col-md-4  mb-5 mt-5">
+            <div class="card">
+              <%= image_tag recipe.image, class: "img-fluid" %>
+              <div class="card-body text-center">
+                <p class="card-text" >
+                  <%= link_to recipe_path(recipe) do %>
+                    <%= recipe.title %>
+                  <% end %>
+                 </p>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <div id="section2" class="tab-pane fade">
@@ -75,12 +69,8 @@
 
           <table class="table table-bordered w-75">
             <tr>
-              <td style="width: 20%", class="bg-light">名前</td>
-              <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-            </tr>
-            <tr>
-              <td class="bg-light">フリガナ</td>
-              <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+              <td style="width: 20%", class="bg-light">ユーザーネーム</td>
+              <td><%= @customer.nickname %></td>
             </tr>
             <tr>
               <td class="bg-light">メールアドレス</td>

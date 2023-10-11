@@ -21,7 +21,7 @@ class Public::RecipesController < ApplicationController
     tag_list = params[:recipe][:name].split(',')
     if @recipe.save
       @recipe.save_tags(tag_list)
-      flash[:notice] = "投稿が完了しました。"
+      flash[:notice] = "レシピを投稿しました！"
     else
       flash[:notice] = "投稿内容に不備があります。"
       render :new
@@ -55,8 +55,10 @@ class Public::RecipesController < ApplicationController
   end
 
   def destroy
-    Comment.find(params[:id]).destroy
-    redirect_to recipe_path(params[:recipe_id])
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    # Comment.find(params[:id]).destroy
+    redirect_to new_recipe_path
   end
 
   def search_tag
@@ -67,7 +69,7 @@ class Public::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:image, :title, :description, :customer_id)
+    params.require(:recipe).permit(:image, :title, :description, :customer_id, procedures_attributes: [:body, :_destroy], ingredients_attributes: [:name, :amount, :_destroy])
   end
 
   def check_customer

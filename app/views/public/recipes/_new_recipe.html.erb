@@ -4,5 +4,10 @@
   <td><%= recipe.title %></td>
   <td><%= recipe.tags.name %></td>
   <td><%= recipe.description %></td>
+  <td>
+  <% if recipe.customer == current_customer %>
+    <%= link_to "削除", recipe_path(recipe), method: :delete %>
+  <% end %>
+  </td>
 </tr>
 <% end %>

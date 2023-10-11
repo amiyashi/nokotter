@@ -64,7 +64,7 @@
           <div class="col">
             <div class="d-flex align-items-center">
               <h4 class="my-3 ml-4">登録情報</h4>
-              <% if @recipe.customer == current_customer %>
+              <% if @customer == current_customer %>
                 <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-outline-secondary ml-4 mb-2" %>
               <% end %>
             </div>

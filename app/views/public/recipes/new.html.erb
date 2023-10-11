@@ -1,48 +1,69 @@
-<div class="container">
+<div class="container mt-4 align-imtes-center">
+  <div class='bg-light mx-auto mb-5'>
+    <%= form_with model: @recipe, local: true do |f| %>
+      <div class="row">
+        <div class="from-group ml-md-5">
+          <div class="form-group mt-5 mx-auto">
+            <%= f.text_field :title, placeholder: "レシピ名", size: "45", class:'py-2 px-2' %>
+          </div>
+        </div>
+        <div class="col">
+          <div class="from-group mr-md-2 mt-3 p-3 bg-white shadow-sm">
+            <h6 class="mb-3"><i class="fas fa-camera font-color-pink mr-2"></i>写真をアップロード</h6>
+            <%= f.file_field :recipe_image %>
+          </div>
+        </div>
+      </div>
 
-  <div class="row">
-    <h2>作り方</h2>
+
+      <div style='max-width: 450px' class="mt-4 border px-5 pt-4 pb-3 bg-white mx-auto shadow-sm">
+        <div class="row">
+          <div class="form-inline mb-2">
+            <h4 class="mb-0">材料</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <%= f.fields_for :ingredients do |ingredient| %>
+            <div class="col">
+              <label>材料</label>
+              <%= ingredient.text_field :name %>
+            </div>
+            <div class="col">
+              <label>分量</label>
+              <%= ingredient.text_field :amount %>
+            </div>
+            <div class="col mt-5">
+              <input type="button" value="削除" onclick="deleteRow(this)">
+            </div>
+          <% end %>
+        </div>
+        <div>
+          <button type="button" class="btn btn-secondary w-100 mt-3">材料を追加</button>
+        </div>
+      </div>
+
+      <div style='max-width: 680px' class="mt-3 px-5 pt-4 mx-auto border-0">
+        <div class="row">
+          <h4 class="text-center mx-auto mb-0">作り方</h4>
+        </div>
+
+        <div class="row">
+          <div class='mt-3'>
+            <%= f.text_field :body, class: 'form-control mb-2', size:'70 x 8' %>
+            <%#= f.submit "手順を追加", class: "btn btn-sm btn-color py-0 mb-3 procedure-add-btn" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4 pb-5">
+        <div class="form-inline mx-auto">
+          <%= f.submit 'レシピを追加', :name => 'post', style: 'font-size: 20px', class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+
+    <%= f.hidden_field :customer_id, :value => current_customer.id %>
+    <% end %>
+
   </div>
-
-  <div class="row">
-    <div class="col-md-2">
-      <%= form_with model: @recipe, url: recipes_path, local: false do |f| %>
-      <div class="field">
-        <%= f.label :タイトル %><br>
-        <%= f.text_field :title, class: "form-control" %>
-      </div>
-      <div class="field">
-        <%= f.label :完成イメージ %><br>
-        <%= f.file_field :image, accept: "image/*", size: "80x80" %>
-      </div>
-      <div class="field">
-        <%= f.label :レシピ %><br>
-        <%= f.text_area :description, size: "40x2", id: "description" %>
-      </div>
-      <div class="field">
-        <%= f.label :タグ※複数個入力できます %><br>
-        <%= f.text_field :name, value: @tag_list, class: 'form-control' %>
-      </div>
-      <div class="form-action">
-        <%= f.submit "レシピの追加", class: "btn btn-success" %>
-      </div>
-      <% end %>
-    </div>
-
-    <div class="col-md-10">
-      <table>
-        <thead>
-          <tr>
-            <th>完成イメージ</th>
-            <th>料理名</th>
-            <th>タグ</th>
-            <th>レシピ</th>
-          </tr>
-        </thead>
-        <tbody id="recipe">
-          <%= render 'public/recipes/new_recipe', recipes: @recipes %>
-        </tbody>
-      </table>
-    </div>
-
 </div>

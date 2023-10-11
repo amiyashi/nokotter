@@ -1,23 +1,39 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  # before_action :configure_sign_in_params,  if: :devise_controller?
+  before_action :reject_customer, only: [:create]
 
-  # ゲストログインのためのアクション追加
+  # ゲストログイン
   def guest_sign_in
     customer = Customer.guest
     sign_in customer
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
-  def customer_state
+  def after_sign_in_path_for(resource)
+    customer_timeline_index_path(current_customer)
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+
+  protected
+
+  # def configure_sign_in_params
+  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+  # end
+
+  def reject_customer
     @customer = Customer.find_by(email: params[:customer][:email])
-    return if !@customer
-    if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == true)
-      flash[:notice] = "退会済みです。再度ご登録お願いします。"
-      redirect_to new_customer_registration_path
+    if @customer
+      if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == true)
+        flash[:alert] = "退会済みです。再度ご登録をしてご利用ください"
+        redirect_to new_customer_registration_path
+      end
     else
-      flash[:notice] = "該当するユーザーが見つかりません"
+      flash[:alert] = "該当するユーザーが見つかりません"
     end
   end
 

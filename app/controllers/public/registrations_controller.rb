@@ -39,15 +39,15 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
-  
+
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys:[ :last_name,:first_name,:last_name_kana,:first_name_kana,:birth_date])
   # end
-  
+
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   # end
-  
+
   def after_sign_up_path_for(resource)
     customer_path(current_customer)
   end

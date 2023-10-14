@@ -44,10 +44,10 @@
 
   <div class="row">
     <% @recipes.each do |recipe| %>
-      <div class="col-md-4">
-        <div class="card" style="width: 17rem; margin-bottom: 30px;">
-          <%= image_tag recipe.image, class: "card-img-top", alt: recipe.title %>
-          <div class="card-body">
+      <div class="col-md-4  mb-5 mt-5">
+        <div class="card">
+          <%= image_tag recipe.image, class: "img-fluid" %>
+          <div class="card-body text-center">
             <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe) %></h5>
             <p class="card-text">
               <%= recipe.bookmarks.count %> 保存

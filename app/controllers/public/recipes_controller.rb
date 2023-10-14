@@ -1,11 +1,10 @@
 class Public::RecipesController < ApplicationController
-  before_action :check_customer, only: [:edit]
+  # before_action :check_customer, only: [:edit]
 
   def index
     @customer = current_customer
     @tag_list = Tag.all
     @q = Recipe.ransack(params[:q])
-    @recipe = Recipe.find(params[:id])
     @recipes = @q.result(distinct: true).includes(:customer).order(created_at: :desc)
   end
 
@@ -34,7 +33,6 @@ class Public::RecipesController < ApplicationController
     @comment = Comment.new
     @tag_list = @recipe.tags.pluck(:name).join(',')
     @recipe_tags = @recipe.tags
-    @customer = current_customer
   end
 
   def edit
@@ -73,10 +71,14 @@ class Public::RecipesController < ApplicationController
     params.require(:recipe).permit(:image, :title, :description, :customer_id, procedures_attributes: [:body, :_destroy], ingredients_attributes: [:name, :amount, :_destroy])
   end
 
-  def check_customer
-    unless current_customer == @customer
-    redirect_to root_path, alert: "他のユーザーのマイページにはアクセスできません。"
-    end
+  def customer_params
+    params.require(:customer).permit(:nickname, :birth_date, :customer_id)
   end
+
+  # def check_customer
+  #   unless current_customer == @customer
+  #   redirect_to root_path, alert: "他のユーザーのマイページにはアクセスできません。"
+  #   end
+  # end
 
 end

@@ -50,6 +50,7 @@
           <div class="card-body text-center">
             <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe) %></h5>
             <p class="card-text">
+              <%= @recipe.tags %>
               <%= recipe.bookmarks.count %> 保存
               <%= link_to "#{recipe.comments.count} コメント", recipe_path(recipe.id) %>
             </p>

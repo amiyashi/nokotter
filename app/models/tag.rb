@@ -3,6 +3,8 @@ class Tag < ApplicationRecord
   has_many :recipes, through: :recipe_tag_relations
   # 2つのモデル間の関連がrecipe_tag_relationsモデルを通じて行われる
 
+  validates :name, presence:true, length:{maximum:50}
+
   def self.ransackable_attributes(auth_object = nil)
     ["name"]
   end

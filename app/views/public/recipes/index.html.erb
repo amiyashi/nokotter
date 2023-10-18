@@ -33,14 +33,14 @@
     </div>
   </div>
 
-  <div class="d-flex">
+  <!--<div class="d-flex">-->
     <!-- タグ一覧 -->
-    <% @tag_list.each do |list| %>
-      <i class="fas fa-tag"></i>
-      <%= link_to list.name, search_tag_recipes_path(tag_id: list.id) %>
-      (<%= list.recipes.count %>)
-    <% end %>
-  </div>
+  <!--  <%# @tag_list.each do |list| %>-->
+  <!--    <i class="fas fa-tag"></i>-->
+  <!--    <%#= link_to list.name, search_tag_recipes_path(tag_id: list.id) %>-->
+  <!--    (<%#= list.recipes.count %>)-->
+  <!--  <%# end %>-->
+  <!--</div>-->
 
   <div class="row">
     <% @recipes.each do |recipe| %>

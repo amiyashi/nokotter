@@ -41,6 +41,9 @@ class Public::RecipesController < ApplicationController
   def edit
     @recipe = Recipe.find(params[:id])
     @tag_list = @recipe.tags.pluck(:name).join(',')
+    if @recipe.customer != current_customer
+    redirect_to recipes_path, alert: "他のユーザーのレシピを編集することはできません。"
+    end
   end
 
   def update
@@ -57,8 +60,8 @@ class Public::RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
-    @recipe.destroy
+    recipe = Recipe.find(params[:id])
+    recipe.destroy
     # Comment.find(params[:id]).destroy
     redirect_to new_recipe_path
   end

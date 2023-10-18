@@ -59,9 +59,10 @@
   </div>
 
   <div class="row">
-    <%# if @customer == current_customer %>
-      <%= link_to '編集する', edit_recipe_path(current_customer), class: "btn btn-outline-secondary ml-4 mb-2" %>
-  　<%# end %>
+    <% if @recipe.customer == current_customer %>
+      <%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-outline-secondary ml-4 mb-2" %>
+      <%= link_to '削除する', recipe_path(@recipe), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  　<% end %>
   </div>
 
   <div class="row">

@@ -7,7 +7,9 @@ class Recipe < ApplicationRecord
   belongs_to :customer
 
   has_many :procedures, dependent: :destroy
+  accepts_nested_attributes_for :procedures, reject_if: :all_blank, allow_destroy: true
   has_many :ingredients, dependent: :destroy
+  accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: true
 
   #関連付けしたモデルを一緒にデータ保存できるようにする記述
   accepts_nested_attributes_for :procedures, allow_destroy: true

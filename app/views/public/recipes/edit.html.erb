@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row">
-    <h2>商品編集</h2>
+    <h2>レシピ編集</h2>
   </div>
 
   <div class="row">
@@ -19,12 +19,7 @@
             <td><%= f.text_field :title, placeholder:"変更後のレシピ名を入力してください" %></td>
           </div>
         </tr>
-        <tr>
-          <div class="form-group">
-            <th>レシピ</th>
-            <td><%= f.text_area :description, size: "50x5", placeholder:"ここにレシピを記述してください" %></td>
-          </div>
-        </tr>
+
         <tr>
           <div class="form-group">
             <th>タグ(,で区切ると複数タグ登録できます)</th>

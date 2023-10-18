@@ -3,7 +3,7 @@
   <!--タグリスト-->
   <% @tag_list.each do |list|%>
     <i class="fa-sharp fa-solid fa-tag"></i>
-    <%=link_to list.name,search_tag_path(tag_id: list.id) %>
+    <%=link_to list.name,search_tag_recipes_path(tag_id: list.id) %>
     <%="(#{list.recipes.count})" %>
   <% end %>
 
@@ -24,7 +24,6 @@
               <%= recipe.title %>
             <% end %>
           </td>
-          <td class="align-items-center"><%= recipe.description %></td>
           <td class="align-items-center"><%= image_tag recipe.image, size: "250x150", class: "img-fluid" %></td>
         </tr>
       </tbody>

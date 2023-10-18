@@ -3,7 +3,6 @@
   <td><%= image_tag recipe.image, size: "80x80" %></td>
   <td><%= recipe.title %></td>
   <td><%= recipe.tags.name %></td>
-  <td><%= recipe.description %></td>
   <td>
   <% if recipe.customer == current_customer %>
     <%= link_to "削除", recipe_path(recipe), method: :delete %>

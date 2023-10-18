@@ -21,9 +21,7 @@
         </div>
       </div>
       <!--レシピ内容-->
-      <div class="row">
-        <p><%= @recipe.description %></p>
-      </div>
+
       <!--投稿者とフォローボタン-->
       <div class="row">
         <div class="col-md-2">
@@ -43,19 +41,12 @@
     </div>
   </div>
 
-
+  <!--タグ-->
   <div class="row">
-     <!--タグ-->
     <% @recipe_tags.each do |tag| %>
       <i class="fa-sharp fa-solid fa-tag"></i>
       <%= link_to tag.name, search_tag_recipes_path(tag_id: tag.id) %>
     <% end %>
-
-    <!--<%# if @recipe.tags.present? %>-->
-    <!--  <div>-->
-    <!--    <%#= render 'recipes/tags', recipe: @recipe %>-->
-    <!--  </div>-->
-    <!--<%# end %>-->
   </div>
 
   <div class="row">
@@ -63,10 +54,6 @@
       <%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-outline-secondary ml-4 mb-2" %>
       <%= link_to '削除する', recipe_path(@recipe), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   　<% end %>
-  </div>
-
-  <div class="row">
-    コメント件数：<%= @recipe.comments.count %>
   </div>
 
   <div class="row">

@@ -20,9 +20,10 @@ class Public::RecipesController < ApplicationController
     @recipe.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にする
     tag_list = params[:recipe][:name].split(',')
-    if @recipe.save
+    # tag_list = params[:recipe][:name].split(',')
+    if @recipe.save!
       @recipe.save_tags(tag_list)
-      redirect_to posts_path(@post)
+      redirect_to recipe_path(@recipe)
       flash[:notice] = "レシピを投稿しました！"
     else
       flash.now[:alert] = "投稿内容に不備があります。"
@@ -73,7 +74,7 @@ class Public::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:image, :title, :description, :customer_id, procedures_attributes: [:id, :body, :_destroy], ingredients_attributes: [:id, :name, :amount, :_destroy])
+    params.require(:recipe).permit(:image, :title, :customer_id, procedures_attributes: [:id, :body, :_destroy], ingredients_attributes: [:id, :name, :amount, :_destroy])
   end
 
   def customer_params

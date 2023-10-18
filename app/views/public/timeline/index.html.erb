@@ -1,11 +1,17 @@
 <div class="container">
   <div class="row">
     <% @timeline.each do |timeline| %>
-    <div class="col">
-      <%= image_tag timeline.image, size: "360x360" %>
-    </div>
-    <div class="col">
-      <h2><%= timeline.title %></h2>
+    <div class="col-md-4  mb-5 mt-5">
+      <div class="card">
+        <%= image_tag timeline.image, class: "img-fluid" %>
+        <div class="card-body text-center">
+          <p class="card-text">
+            <%= link_to recipe_path(timeline) do %>
+              <%= timeline.title %>
+            <% end %>
+          </p>
+        </div>
+      </div>
     </div>
     <% end %>
   </div>

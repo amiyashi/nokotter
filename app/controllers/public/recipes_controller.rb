@@ -11,8 +11,8 @@ class Public::RecipesController < ApplicationController
   def new
     @recipes = Recipe.all
     @recipe = Recipe.new
-    @post.ingredients.build
-    @post.procedures.build
+    @recipe.ingredients.build
+    @recipe.procedures.build
   end
 
   def create

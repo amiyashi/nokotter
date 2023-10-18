@@ -11,19 +11,22 @@ class Public::RecipesController < ApplicationController
   def new
     @recipes = Recipe.all
     @recipe = Recipe.new
+    @post.ingredients.build
+    @post.procedures.build
   end
 
   def create
     @recipes = Recipe.all
-    @recipe = Recipe.new(recipe_params)
+    @recipe = current_customer.recipes.new(recipe_params)
     @recipe.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にする
     tag_list = params[:recipe][:name].split(',')
     if @recipe.save
       @recipe.save_tags(tag_list)
+      redirect_to posts_path(@post)
       flash[:notice] = "レシピを投稿しました！"
     else
-      flash[:notice] = "投稿内容に不備があります。"
+      flash.now[:alert] = "投稿内容に不備があります。"
       render :new
     end
   end
@@ -68,7 +71,7 @@ class Public::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:image, :title, :description, :customer_id, procedures_attributes: [:body, :_destroy], ingredients_attributes: [:name, :amount, :_destroy])
+    params.require(:recipe).permit(:image, :title, :description, :customer_id, procedures_attributes: [:id, :body, :_destroy], ingredients_attributes: [:id, :name, :amount, :_destroy])
   end
 
   def customer_params

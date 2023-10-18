@@ -3,7 +3,6 @@ class Public::RecipesController < ApplicationController
 
   def index
     @customer = current_customer
-    @tag_list = Tag.all
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result(distinct: true).includes(:customer).order(created_at: :desc)
   end

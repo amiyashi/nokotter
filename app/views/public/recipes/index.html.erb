@@ -3,10 +3,9 @@
   <div class="row">
     <div class="col-12 col-md-6 col-lg-4">
       <%= search_form_for @q do |f| %>
-      <%= f.label :title, "レシピ検索", class: "m-0" %>
       <div class="input-group mb-3">
         <!--<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">-->
-        <%= f.search_field :title_or_tags_name_cont, class: "form-control" %>
+        <%= f.search_field :title_or_tags_name_cont, placeholder: "料理名・食材で探す", class: "form-control" %>
         <div class="input-group-append">
           <!--<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>-->
           <%= f.submit '検索', class: 'btn btn-primary btn-sm' %>
@@ -51,7 +50,7 @@
             <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe) %></h5>
             <p class="card-text">
               <%= recipe.bookmarks.count %> 保存
-              <%= link_to "#{recipe.comments.count} コメント", recipe_path(recipe.id) %>
+              <%= recipe.comments.count %> コメント
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 <div class="container mt-4 align-imtes-center">
   <div class='bg-light mx-auto mb-5'>
-    <%= form_with model: @recipe, url:  recipes_path, local: true do |f| %>
+    <%= form_with model: @recipe, url: recipes_path, local: true do |f| %>
     <div class="row">
       <div class="col-md-6 col-lg-5 offset-lg-1 mt-3">
         <%= f.text_field :title, placeholder: "レシピ名", size: "45", class:'py-2 px-2' %>
@@ -8,48 +8,49 @@
       <div class="col-md-6 col-lg-5 col-sm-4 mt-3 pl-4 pt-2">
         <div class="from-group mr-md-2 mt-3 ml-md-5 p-3 bg-white shadow-sm">
           <h6 class="mb-3"><i class="fas fa-camera font-color-pink mr-2"></i>写真をアップロード</h6>
-          <%= f.file_field :recipe_image %>
+          <%= f.file_field :image %>
         </div>
       </div>
       <label>タグ(,で区切ると複数タグ登録できます)</label>
-      <%= f.text_field :name,value: @tag_list, class: 'form-control mb-2' %>
+      <%= f.text_field :name,value: tag_list, class: 'form-control mb-2' %>
     </div>
 
-    <!--材料登録-->
+    <!-- 材料、分量フォームの隠し要素テンプレート、display: noneを指定しているため表示はされない -->
     <div id="ingredient-fields-template" style="display: none;">
       <!-- 新しいIngredientオブジェクトを作成, 新たに追加されるフォームに一意なインデックスを付与 -->
       <%= f.fields_for :ingredients, Ingredient.new, child_index: "new_ingredient" do |ingredient_field| %>
         <%= render 'ingredient_fields', f: ingredient_field %>
       <% end %>
     </div>
+
     <!--すでにデータベースに保存されているか、または新しくユーザーが追加した「材料」に関する情報を表示するためのフォーム-->
     <%= f.fields_for :ingredients do |ingredient_field| %>
       <%= render 'ingredient_fields', f: ingredient_field %>
     <% end %>
     <div id="ingredients"></div>
     <div>
-      <!--材料、分量追加ボタン-->
+      <!--材料、分量フォームを追加できる-->
       <button type="button" id="add-ingredient" class="btn mb-4"  style="background-color: #FFD5EC;">材料を追加</button>
     </div>
 
-    <div style='max-width: 680px' class="mt-3 px-5 pt-4 mx-auto border-0">
-      <!--作り方登録-->
-      <div id="procedure-fields-template" style="display: none;">
-        <!--新しいRecipeStepオブジェクトを作成-->
-        <%= f.fields_for :procedures, Procedure.new, child_index: "new_procedure" do |procedure_field| %>
-          <%= render 'procedure_fields', f: procedure_field %>
-        <% end %>
-      </div>
-      <!--すでにデータベースに存在するか、または新しく追加された「作り方」ステップを表示する-->
-      <%= f.fields_for :procedures do |procedure_field| %>
+    <!--作り方フォームの隠し要素テンプレート-->
+    <div id="procedure-fields-template" style="display: none;">
+      <!--新しいRecipeStepオブジェクトを作成-->
+      <%= f.fields_for :procedures, Procedure.new, child_index: "new_procedure" do |procedure_field| %>
         <%= render 'procedure_fields', f: procedure_field %>
       <% end %>
-      <div id="procedures"></div>
-      <div>
-        <!--作り方フォームを追加できる-->
-        <button type="button" id="add-procedure" class="btn"  style="background-color: #FFD5EC;">手順を追加</button>
-      </div>
     </div>
+
+    <!--すでにデータベースに存在するか、または新しく追加された「作り方」ステップを表示するフォーム-->
+    <%= f.fields_for :procedures do |procedure_field| %>
+      <%= render 'procedure_fields', f: procedure_field %>
+    <% end %>
+    <div id="procedures"></div>
+    <div>
+      <!--作り方フォームを追加できる-->
+      <button type="button" id="add-procedure" class="btn"  style="background-color: #FFD5EC;">作り方を追加</button>
+    </div>
+
     <%= f.submit "投稿する", class: 'btn btn-success mb-5 ml-3' %>
     <% end %>
 

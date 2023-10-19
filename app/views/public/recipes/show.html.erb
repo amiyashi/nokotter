@@ -14,7 +14,9 @@
       <a id="favorite_btn_<%= @recipe.id %>">
         <%= render "public/bookmarks/btn", recipe: @recipe %>
       </a>
-    （コメント：<%= @recipe.comments.count %>件）<br>
+      <a id="comment_counter">
+       <%= render "public/comments/counter", recipe: @recipe %>
+      </a>
       <!--投稿者とフォローボタン-->
       <i class="fa-solid fa-circle-user"></i>
       <%= link_to "作った人", customer_path(@recipe.customer) %>
@@ -67,30 +69,10 @@
     </div>
   </div>
 
-  <div class="row">
-    <%= form_with model: [@recipe, @comment] do |f| %>
-      <%= f.text_area :content, rows: '1', placeholder: "コメントをここに" %>
-      <%= f.submit "送信する" %>
-    <% end %>
-  </div>
+  <%= render "public/comments/form", recipe: @recipe, comment: @comment %>
 
-  <div class="row">
-    <table>
-      <tbody>
-      <% @recipe.comments.each do |comment| %>
-        <tr>
-          <td><%= comment.customer.nickname %></td>
-          <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= comment.content %></td>
-          <td>
-            <% if comment.customer == current_customer %>
-              <%= link_to "削除", recipe_comment_path(comment.recipe, comment), method: :delete %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+  <div id="comment_index">
+       <%= render "public/comments/index", recipe: @recipe %>
   </div>
 
 </div>

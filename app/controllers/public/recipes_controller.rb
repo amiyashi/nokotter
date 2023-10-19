@@ -5,6 +5,8 @@ class Public::RecipesController < ApplicationController
     @customer = current_customer
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result(distinct: true).includes(:customer).order(created_at: :desc)
+    # @recipe = Recipe.find(params[:id])
+    # @tag_list = @recipe.tags.pluck(:name).join(',')
   end
 
   def new

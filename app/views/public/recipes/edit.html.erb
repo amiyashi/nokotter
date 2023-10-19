@@ -9,14 +9,14 @@
     <table>
       <tr>
         <div class="form-group">
-          <th>レシピ画像</th>
-          <td><%= f.file_field :image, accept: "image/*" %></td>
+          <th>レシピ名</th>
+          <td><%= f.text_field :title, placeholder:"変更後のレシピ名を入力してください" %></td>
         </div>
       </tr>
       <tr>
         <div class="form-group">
-          <th>レシピ名</th>
-          <td><%= f.text_field :title, placeholder:"変更後のレシピ名を入力してください" %></td>
+          <th>レシピ画像</th>
+          <td><%= f.file_field :image, accept: "image/*" %></td>
         </div>
       </tr>
       <tr>

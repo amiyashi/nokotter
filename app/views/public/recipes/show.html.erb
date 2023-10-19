@@ -3,90 +3,75 @@
   <div class="row">
     <div class="col-md-4">
       <%= image_tag @recipe.image, size: "350x250", class: "img-fluid" %>
-    </div>
-    <div class="col-md-8">
       <!--タイトル-->
-      <div class="row">
-        <h2><%= @recipe.title %></h2>
-      </div>
-      <!--食材・分量-->
-      <!--<div class="card mb-4">-->
-      <!--  <div class="card-header">-->
-      <!--    食材-->
-      <!--  </div>-->
-      <!--  <div class="card-body">-->
-      <!--    <%# ingredients.each do |ingredient| %>-->
-      <!--      <div class="row">-->
-      <!--        <div class="col-6">-->
-      <!--           <%#= ingredient.name %>-->
-      <!--        </div>-->
-      <!--        <div class="col-6">-->
-      <!--          <strong class="col-3">分量</strong> <%#= ingredient.amount %>-->
-      <!--        </div>-->
-      <!--      </div>-->
-      <!--    <%# end %>-->
-      <!--  </div>-->
-      <!--</div>-->
-      <!--手順-->
-      <!--<div class="card-body">-->
-      <!--  <%# procedures.each_with_index do |procedure, index| %>-->
-      <!--    <div class="card mb-2">-->
-      <!--      <div class="card-header">-->
-      <!--        <strong>ステップ<%#= index + 1 %></strong>-->
-      <!--      </div>-->
-      <!--      <div class="card-body">-->
-      <!--        <p><%#= procedure.body %></p>-->
-      <!--      </div>-->
-      <!--    </div>-->
-      <!--  <%# end %>-->
-      <!--</div>-->
-
-
+      <h3><%= @recipe.title %></h3>
+      <!--タグ-->
+      <% @recipe_tags.each do |tag| %>
+        <i class="fa-sharp fa-solid fa-tag"></i>
+        <%= link_to tag.name, search_tag_recipes_path(tag_id: tag.id) %>
+      <% end %>
       <!--ブックマークとコメント数-->
-      <div class="row">
-        <div class="col-md-1">
-          <div id="favorite_btn_<%= @recipe.id %>">
-            <%= render "public/bookmarks/btn", recipe: @recipe %>
-          </div>
-        </div>
-        <div class="col-md-1-offset-10">
-         （コメント：<%= @recipe.comments.count %>件）
-        </div>
+      <div id="favorite_btn_<%= @recipe.id %>">
+        <%= render "public/bookmarks/btn", recipe: @recipe %>
       </div>
-      <!--レシピ内容-->
-
+      （コメント：<%= @recipe.comments.count %>件）
       <!--投稿者とフォローボタン-->
-      <div class="row">
-        <div class="col-md-2">
-          <i class="fa-solid fa-circle-user"></i>
-          <%= link_to "作った人", customer_path(@recipe.customer) %>
+      <i class="fa-solid fa-circle-user"></i>
+      <%= link_to "作った人", customer_path(@recipe.customer) %>
+      <!--フォローボタン-->
+      <% if current_customer.following?(@recipe.customer) %>
+        <%= link_to "フォロー外す", customer_relationships_path(@recipe.customer.id), method: :delete %>
+      <% else %>
+        <%= link_to "フォローする", customer_relationships_path(@recipe.customer.id), method: :post %>
+      <% end %>
+
+        <% if @recipe.customer == current_customer %>
+          <%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-outline-secondary ml-4 mb-2" %>
+          <%= link_to '削除する', recipe_path(@recipe), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      　<% end %>
+
+    </div>
+
+    <div class="col-md-8">
+      食材・分量
+      <div class="card mb-4">
+        <div class="card-header">
+          食材
         </div>
-        <div class="col-md-2-offset-8">
-          <!--フォローボタン-->
-          <% if current_customer.following?(@recipe.customer) %>
-            <%= link_to "フォロー外す", customer_relationships_path(@recipe.customer.id), method: :delete %>
-          <% else %>
-            <%= link_to "フォローする", customer_relationships_path(@recipe.customer.id), method: :post %>
+        <div class="card-body">
+          <% @recipe.ingredients.each do |ingredient| %>
+            <div class="row">
+              <div class="col-6">
+                 <%= ingredient.name %>
+              </div>
+              <div class="col-6">
+                <strong class="col-3">分量</strong> <%= ingredient.amount %>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>
-
+      手順
+      <div class="card-body">
+        <% @recipe.procedures.each_with_index do |procedure, index| %>
+          <div class="card mb-2">
+            <div class="card-header">
+              <strong>手順<%= index + 1 %></strong>
+            </div>
+            <div class="card-body">
+              <p><%= procedure.body %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 
-  <!--タグ-->
   <div class="row">
-    <% @recipe_tags.each do |tag| %>
-      <i class="fa-sharp fa-solid fa-tag"></i>
-      <%= link_to tag.name, search_tag_recipes_path(tag_id: tag.id) %>
+    <%= form_with model: [@recipe, @comment] do |f| %>
+      <%= f.text_area :content, rows: '1', placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
     <% end %>
-  </div>
-
-  <div class="row">
-    <% if @recipe.customer == current_customer %>
-      <%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-outline-secondary ml-4 mb-2" %>
-      <%= link_to '削除する', recipe_path(@recipe), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  　<% end %>
   </div>
 
   <div class="row">
@@ -94,7 +79,7 @@
       <tbody>
       <% @recipe.comments.each do |comment| %>
         <tr>
-          <td><%= comment.customer.last_name %><%= comment.customer.first_name %></td>
+          <td><%= comment.customer.nickname %></td>
           <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
           <td><%= comment.content %></td>
           <td>
@@ -107,13 +92,6 @@
       <% end %>
       </tbody>
     </table>
-  </div>
-
-  <div>
-    <%= form_with model: [@recipe, @comment] do |f| %>
-      <%= f.text_area :content, rows: '1', placeholder: "コメントをここに" %>
-      <%= f.submit "送信する" %>
-    <% end %>
   </div>
 
 </div>

@@ -1,25 +1,16 @@
 <div class="container">
 
-  <div class="row">
-    <div class="col-12 col-md-6 col-lg-4">
-      <%= search_form_for @q do |f| %>
-      <div class="input-group mb-3">
-        <!--<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">-->
-        <%= f.search_field :title_or_tags_name_cont, placeholder: "料理名・食材で探す", class: "form-control" %>
-        <div class="input-group-append">
-          <!--<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>-->
-          <%= f.submit '検索', class: 'btn btn-primary btn-sm' %>
-        </div>
-      </div>
-      <% end %>
-    </div>
-    <!--<p class="m-0">レシピ検索</p>-->
-
-      <!--<%= search_form_for @q do |f| %>-->
-      <!--  <%= f.label :tags, "タグ" %>-->
-      <!--  <%= f.search_field :tags_name_cont %>-->
-      <!--  <%= f.submit '検索', class: 'btn btn-primary' %>-->
-      <!--<% end %>-->
+  <div class="search">
+    <%= search_form_for @q do |f| %>
+    <!--<div class="input-group mb-3">-->
+      <!--<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">-->
+      <%= f.search_field :title_or_tags_name_cont, placeholder: "料理名・食材で探す" %>
+      <!--<div class="input-group-append">-->
+        <!--<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>-->
+      <%= f.submit %>
+      <!--</div>-->
+    <!--</div>-->
+    <% end %>
   </div>
 
   <div class="row">
@@ -47,7 +38,10 @@
         <div class="card">
           <%= image_tag recipe.image, class: "img-fluid" %>
           <div class="card-body text-center">
-            <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe) %></h5>
+            <h5 class="card-title">
+              <%= image_tag recipe.customer.get_profile_image(80,80) %>
+              <%= link_to recipe.title, recipe_path(recipe) %>
+            </h5>
             <p class="card-text">
               <%= recipe.bookmarks.count %> 保存
               <%= recipe.comments.count %> コメント

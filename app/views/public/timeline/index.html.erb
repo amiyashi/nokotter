@@ -6,6 +6,7 @@
         <%= image_tag timeline.image, class: "img-fluid" %>
         <div class="card-body text-center">
           <p class="card-text">
+            <%= image_tag timeline.customer.get_profile_image(80,80) %>
             <%= link_to recipe_path(timeline) do %>
               <%= timeline.title %>
             <% end %>

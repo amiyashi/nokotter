@@ -25,6 +25,7 @@
               <%= image_tag recipe.image, class: "img-fluid" %>
               <div class="card-body text-center">
                 <p class="card-text">
+                  <%= image_tag recipe.customer.get_profile_image(80,80) %>
                   <%= link_to recipe_path(recipe) do %>
                     <%= recipe.title %>
                   <% end %>
@@ -47,6 +48,7 @@
                 <%= image_tag recipe.image, class: "img-fluid" %>
                 <div class="card-body text-center">
                   <p class="card-title">
+                    <%= image_tag @customer.get_profile_image(100,100) %>
                     <%= link_to recipe_path(recipe) do %>
                       <%= recipe.title %>
                     <% end %>

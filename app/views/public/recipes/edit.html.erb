@@ -7,32 +7,31 @@
   <div class="row">
     <%= form_with model: @recipe, url: recipe_path, local: true do |f| %>
     <table>
-        <tr>
-          <div class="form-group">
-            <th>レシピ画像</th>
-            <td><%= f.file_field :image, accept: "image/*" %></td>
-          </div>
-        </tr>
-        <tr>
-          <div class="form-group">
-            <th>レシピ名</th>
-            <td><%= f.text_field :title, placeholder:"変更後のレシピ名を入力してください" %></td>
-          </div>
-        </tr>
-
-        <tr>
-          <div class="form-group">
-            <th>タグ(,で区切ると複数タグ登録できます)</th>
-            <td><%= f.text_field :name,value: @tag_list, class: 'form-control' %></td>
-          </div>
-        </tr>
-        <tr>
-          <div class="form-action">
-            <th><%= f.submit "変更を保存", class: "btn btn-success" %></th>
-          </div>
-        </tr>
-      </table>
-      <% end %>
+      <tr>
+        <div class="form-group">
+          <th>レシピ画像</th>
+          <td><%= f.file_field :image, accept: "image/*" %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-group">
+          <th>レシピ名</th>
+          <td><%= f.text_field :title, placeholder:"変更後のレシピ名を入力してください" %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-group">
+          <th>タグ(,で区切ると複数タグ登録できます)</th>
+          <td><%= f.text_field :name,value: @tag_list, class: 'form-control' %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-action">
+          <th><%= f.submit "変更を保存", class: "btn btn-success" %></th>
+        </div>
+      </tr>
+    </table>
+    <% end %>
   </div>
 
 </div>

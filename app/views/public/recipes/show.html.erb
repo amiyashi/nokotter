@@ -9,12 +9,12 @@
       <% @recipe_tags.each do |tag| %>
         <i class="fa-sharp fa-solid fa-tag"></i>
         <%= link_to tag.name, search_tag_recipes_path(tag_id: tag.id) %>
-      <% end %>
+      <% end %><br>
       <!--ブックマークとコメント数-->
-      <div id="favorite_btn_<%= @recipe.id %>">
+      <a id="favorite_btn_<%= @recipe.id %>">
         <%= render "public/bookmarks/btn", recipe: @recipe %>
-      </div>
-      （コメント：<%= @recipe.comments.count %>件）
+      </a>
+    （コメント：<%= @recipe.comments.count %>件）<br>
       <!--投稿者とフォローボタン-->
       <i class="fa-solid fa-circle-user"></i>
       <%= link_to "作った人", customer_path(@recipe.customer) %>
@@ -23,7 +23,7 @@
         <%= link_to "フォロー外す", customer_relationships_path(@recipe.customer.id), method: :delete %>
       <% else %>
         <%= link_to "フォローする", customer_relationships_path(@recipe.customer.id), method: :post %>
-      <% end %>
+      <% end %><br>
 
         <% if @recipe.customer == current_customer %>
           <%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-outline-secondary ml-4 mb-2" %>

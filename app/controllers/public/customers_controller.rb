@@ -44,13 +44,13 @@ class Public::CustomersController < ApplicationController
 
   # フォロー一覧
   def followings
-    customer = Customer.find(params[:id])
-    @customers = customer.followings
+    @customer = Customer.find(params[:id])
+    @customers = @customer.followings
   end
   # フォロワー一覧
   def followers
-    customer = Customer.find(params[:id])
-    @customers = customer.followers
+    @customer = Customer.find(params[:id])
+    @customers = @customer.followers
   end
 
   private

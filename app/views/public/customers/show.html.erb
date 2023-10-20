@@ -67,17 +67,14 @@
         <div class="row">
           <div class="col-10 mx-auto">
             <div class="d-flex align-items-center">
-              <h4 class="my-3 ml-4">登録情報</h4>
+              <% if @customer == current_customer %>
+                <strong class="mt-4 mb-3"><%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-outline-secondary ml-4 mt-2" %></strong>
+              <% end %>
 
             </div>
             <table class="table table-list">
               <tr>
                 <td><%= image_tag @customer.get_profile_image(100,100) %></td>
-                <td>
-                  <% if @customer == current_customer %>
-                    <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-outline-secondary ml-4 mt-2" %>
-                  <% end %>
-                </td>
               </tr>
               <tr>
                 <td style="width: 20%", class="bg-light">ユーザーネーム</td>

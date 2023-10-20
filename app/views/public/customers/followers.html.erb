@@ -1,13 +1,15 @@
-<p>フォロワー一覧</p><br/>
-  <tbody>
-  <% @customers.each do |customer| %>
-    <tr>
-      <!--<td><%#= attachment_image_tag user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg" , size:"40x40" %></td>-->
-      <td>
-        <%= link_to customer.nickname, customer_path(customer) %>
-      </td>
-      <td>フォロー数：<%= customer.followings.count %></td>
-      <td>フォロワー数：<%= customer.followers.count %></td>
-    </tr>
-  <% end %>
-  </tbody>
+<div class="container mt-4 align-items-center">
+  <div class="row">
+    <p>フォロワー</p>
+  </div>
+  <div class="row">
+    <% if @customers.exists? %>
+      <% @customers.each do |customer| %>
+        <p><%= image_tag customer.get_profile_image(80,80), size: "80x80" %></p>
+        <p class="pl-5 pr-3 pt-4"><%= link_to customer.nickname, customer_path(customer) %></p>
+      <% end %>
+    <% else %>
+        <p>はいません</p>
+    <% end %>
+  </div>
+</div>

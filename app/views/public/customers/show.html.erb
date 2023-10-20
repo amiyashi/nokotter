@@ -10,9 +10,6 @@
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#section3">プロフィール</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#section4">フォロー/フォロワー</a>
-    </li>
   </ul>
 
   <div class="tab-content">
@@ -74,6 +71,10 @@
             <table class="table table-list">
               <tr>
                 <td><%= image_tag @customer.get_profile_image(100,100) %></td>
+                <td>
+                  <h6><strong class="pr-2"><%= link_to @customer.followings.count, followings_customer_path %></strong>フォロー中</h6>
+                  <h6><strong class="pr-2"><%= link_to @customer.followers.count, followers_customer_path %></strong>フォロワー</h6>
+                </td>
               </tr>
               <tr>
                 <td style="width: 20%", class="bg-light">ユーザーネーム</td>
@@ -93,23 +94,5 @@
       </div>
     </div>
 
-    <div id="section4" class="tab-pane fade">
-      <div class="container">
-        <div class="row">
-          <div class="col-2 mx-auto mt-5">
-            <h5>
-              フォロー
-              <%= link_to @customer.followings.count, followings_customer_path %>
-            </h5>
-          </div>
-          <div class="col-2 mx-auto mt-5">
-            <h5>
-              フォロワー
-              <%= link_to @customer.followers.count, followers_customer_path %>
-            </h4>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<p><%= @customer.nickname %>さんのマイページ</p>
+<h5 class="pb-3"><%= @customer.nickname %>さんのマイページ</h5>
 <div class="tabs">
   <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -70,7 +70,6 @@
               <% if @customer == current_customer %>
                 <strong class="mt-4 mb-3"><%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-outline-secondary ml-4 mt-2" %></strong>
               <% end %>
-
             </div>
             <table class="table table-list">
               <tr>
@@ -95,11 +94,22 @@
     </div>
 
     <div id="section4" class="tab-pane fade">
-      <h4>フォロー</h4>
-        <p><%= link_to @customer.followings.count, followings_customer_path %></p>
-      <h4>フォロワー</h4>
-        <p><%= link_to @customer.followers.count, followers_customer_path %></p>
+      <div class="container">
+        <div class="row">
+          <div class="col-2 mx-auto mt-5">
+            <h5>
+              フォロー
+              <%= link_to @customer.followings.count, followings_customer_path %>
+            </h5>
+          </div>
+          <div class="col-2 mx-auto mt-5">
+            <h5>
+              フォロワー
+              <%= link_to @customer.followers.count, followers_customer_path %>
+            </h4>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
 </div>

@@ -5,13 +5,13 @@
   <div class="row">
     <% if @customers.exists? %>
       <% @customers.each do |customer| %>
-        <div class="col-md-2">
+        <div class="col-md-2 offset-2">
           <p><%= image_tag customer.get_profile_image(100,100) %></p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 offset-1">
           <p class="pl-5 pr-3 pt-4"><%= link_to customer.nickname, customer_path(customer) %></p>
         </div>
-        <div class="col-md-3 pt-3">
+        <div class="col-md-3 offset-1 pt-3">
           <p id="follow_buttons_<%= @customer.id %>">
             <% if customer != current_customer %>
               <%= render "public/relationships/btn", customer: @customer %>

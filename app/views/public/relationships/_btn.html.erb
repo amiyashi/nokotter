@@ -1,5 +1,5 @@
 <% if current_customer.following?(customer) %>
-  <%= link_to "フォロー外す", customer_relationships_path(customer), method: :delete, remote: true, data: {"turbolinks" => false}, class: "btn btn-secondary" %>
+  <%= link_to "フォロー外す", customer_relationships_path(customer.id), method: :delete, remote: true, data: {"turbolinks" => false}, class: "btn btn-secondary" %>
 <% else %>
-  <%= link_to "フォローする", customer_relationships_path(customer), method: :post, remote: true, data: {"turbolinks" => false}, class: "btn btn-secondary" %>
+  <%= link_to "フォローする", customer_relationships_path(customer.id), method: :post, remote: true, data: {"turbolinks" => false}, class: "btn btn-secondary" %>
 <% end %>

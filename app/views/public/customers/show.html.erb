@@ -1,4 +1,11 @@
-<h5 class="pb-3"><%= @customer.nickname %>さんのマイページ</h5>
+<div class="pb-3" style="display: flex; align-items: center;">
+  <h5 class="pb-3"><%= @customer.nickname %>さんのマイページ</h5>
+  <p id="follow_buttons_<%= @customer.id %>" style="margin-left: 20px;">
+    <% if @customer != current_customer %>
+      <%= render "public/relationships/btn", customer: @customer %>
+    <% end %>
+  </p>
+</div>
 <div class="tabs">
   <ul class="nav nav-tabs">
     <li class="nav-item">

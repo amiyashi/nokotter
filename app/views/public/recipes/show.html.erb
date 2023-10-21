@@ -22,11 +22,16 @@
       <!--投稿者とフォローボタン-->
       <i class="fa-solid fa-circle-user"></i>
       <%= link_to "作った人", customer_path(@recipe.customer) %>
-
-      <% if @recipe.customer == current_customer %>
-        <%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-outline-secondary ml-4 mb-2" %>
-        <%= link_to '削除する', recipe_path(@recipe), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-    　<% end %>
+      <div style="display: flex;" class="mt-2">
+        <% if @recipe.customer == current_customer %>
+          <div class="mr-2">
+            <%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-outline-secondary ml-4 mb-2" %>
+          </div>
+          <div>
+            <%= link_to '削除する', recipe_path(@recipe), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-outline-danger" %>
+          </div>
+      　<% end %>
+      </div>
 
     </div>
 

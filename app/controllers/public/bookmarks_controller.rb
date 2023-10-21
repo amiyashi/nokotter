@@ -1,4 +1,5 @@
 class Public::BookmarksController < ApplicationController
+  # before_action :ensure_normal_customer, only: [:create, :destroy]
 
   def show
      # ブックマーク一覧
@@ -17,4 +18,12 @@ class Public::BookmarksController < ApplicationController
     bookmark = current_customer.bookmarks.find_by(recipe_id: @recipe.id)
     bookmark.destroy
   end
+
+  # def ensure_normal_customer
+  #   @customer = current_customer
+  #   if @customer.email == 'guest@example.com'
+  #   redirect_to root_path, alert: 'ゲストユーザーの保存機能はできません。'
+  #   end
+  # end
+
 end

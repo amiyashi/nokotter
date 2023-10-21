@@ -1,5 +1,6 @@
 class Public::RecipesController < ApplicationController
-  # before_action :check_customer, only: [:edit]
+  before_action :check_customer, only: [:edit]
+  # before_action :ensure_normal_customer, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @customer = current_customer
@@ -83,9 +84,16 @@ class Public::RecipesController < ApplicationController
     params.require(:customer).permit(:nickname, :birth_date, :customer_id)
   end
 
-  # def check_customer
-  #   unless current_customer == @customer
-  #   redirect_to root_path, alert: "他のユーザーのマイページにはアクセスできません。"
+  def check_customer
+    unless current_customer == @customer
+    redirect_to root_path, alert: "他のユーザーのマイページにはアクセスできません。"
+    end
+  end
+
+  # def ensure_normal_customer
+  #   @customer = current_customer
+  #   if @customer.email == 'guest@example.com'
+  #   redirect_to root_path, alert: 'ゲストユーザーの新規投稿はできません。'
   #   end
   # end
 

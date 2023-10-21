@@ -1,6 +1,7 @@
 class Public::CustomersController < ApplicationController
   # ログインしてるユーザーにのみプロフィール見れる
   # before_action :authenticate_user!
+  before_action :ensure_normal_customer, only: [:edit, :update, :withdrawal]
 
   def new
     @customer = Customer.new
@@ -57,6 +58,13 @@ class Public::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:nickname, :birth_date, :customer_id, :profile_image, :email)
+  end
+
+  def ensure_normal_customer
+    @customer = current_customer
+    if @customer.email == 'guest@example.com'
+     redirect_to root_path, alert: 'ゲストユーザーはプロフィール編集できません。'
+    end
   end
 
 end

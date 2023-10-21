@@ -1,4 +1,6 @@
 class Public::CommentsController < ApplicationController
+  # before_action :ensure_normal_customer, only: [:create, :destroy]
+
   def create
     recipe = Recipe.find(params[:recipe_id])
     @comment = current_customer.comments.new(comment_params)

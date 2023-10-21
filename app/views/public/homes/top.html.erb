@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h3 style="padding-bottom: 20px;">
-      <i class="fa-solid fa-ranking-star" style="margin-right: 10px;"></i>人気ランキング
+      <i class="fa-solid fa-ranking-star mt-3" style="margin-right: 10px;"></i>人気ランキング
     </h3>
   </div>
 </div>
@@ -12,7 +12,7 @@
     <div class="card align-items-center justify-content-center">
       <h3 style="padding-top: 20px; padding-bottom: 20px;">第<%= i %>位</h3>
       <div>
-        <%= image_tag recipe.image, :size =>'300x300', alt: recipe.title %>
+        <%= image_tag recipe.image, :size =>'200x200', alt: recipe.title %>
       </div>
       <div style="margin-top: 10px;">
         <h4><%= link_to recipe.title, recipe_path(recipe) %></h4>

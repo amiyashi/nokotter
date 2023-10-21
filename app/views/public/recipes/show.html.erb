@@ -4,14 +4,14 @@
     <div class="col-md-4">
       <%= image_tag @recipe.image, size: "350x250", class: "img-fluid" %>
       <!--タイトル-->
-      <h3><%= @recipe.title %></h3>
+      <h3 class="mb-3 mt-3"><%= @recipe.title %></h3>
       <!--タグ-->
       <% @recipe_tags.each do |tag| %>
         <i class="fa-sharp fa-solid fa-tag"></i>
         <%= link_to tag.name, search_tag_recipes_path(tag_id: tag.id) %>
       <% end %><br>
       <!--ブックマークとコメント数-->
-      <div  style="display: flex;">
+      <div style="display: flex;" class="mt-5">
         <div id="favorite_btn_<%= @recipe.id %>">
           <%= render "public/bookmarks/btn", recipe: @recipe %>
         </div>

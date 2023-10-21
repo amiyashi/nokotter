@@ -4,7 +4,7 @@
     <%= f.label :body, raw("作り方" + content_tag(:span, "（必須）", class: "required-label")) %>
     <div class="input-group">
       <%= f.text_area :body, class: "form-control", rows: "2" %>
-      <div class="input-group-append">
+      <div class="input-group-append ml-4">
         <button type="button" class="btn btn-danger remove-body">
           <i class="fas fa-trash-alt"></i>
         </button>

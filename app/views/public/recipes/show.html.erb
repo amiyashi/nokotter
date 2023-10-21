@@ -11,16 +11,17 @@
         <%= link_to tag.name, search_tag_recipes_path(tag_id: tag.id) %>
       <% end %><br>
       <!--ブックマークとコメント数-->
-      <a id="favorite_btn_<%= @recipe.id %>">
-        <%= render "public/bookmarks/btn", recipe: @recipe %>
-      </a>
-      <a id="comment_counter">
-       <%= render "public/comments/counter", recipe: @recipe %>
-      </a><br>
+      <div  style="display: flex;">
+        <div id="favorite_btn_<%= @recipe.id %>">
+          <%= render "public/bookmarks/btn", recipe: @recipe %>
+        </div>
+        <div id="comment_counter">
+         <%= render "public/comments/counter", recipe: @recipe %>
+        </div>
+      </div>
       <!--投稿者とフォローボタン-->
       <i class="fa-solid fa-circle-user"></i>
       <%= link_to "作った人", customer_path(@recipe.customer) %>
-
 
       <% if @recipe.customer == current_customer %>
         <%= link_to '編集する', edit_recipe_path(@recipe), class: "btn btn-outline-secondary ml-4 mb-2" %>

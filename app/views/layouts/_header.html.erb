@@ -1,42 +1,46 @@
-<header class="d-flex flex-column justify-content-center" style="height: 100px;">
-  <% if customer_signed_in? %>
-    <nav class="nav">
-      <li class="nav-item">
-        <%= link_to "マイページ", customer_path(current_customer), class: "nav-link text-dark" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "タイムライン", customer_timeline_index_path(current_customer), class: "nav-link text-dark" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "みんなのレシピ", recipes_path, class: "nav-link text-dark" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link text-dark" %>
-      </li>
-    </nav>
-  <% elsif admin_signed_in? %>
-    <nav class="nav">
-      <li class="nav-item">
-        <%= link_to "ユーザー一覧", admin_customers_path, class: "nav-link text-dark" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-dark" %>
-      </li>
-    </nav>
-  <% else %>
-    <nav class="nav">
-      <li class="nav-item">
-        <%= link_to "これはなに？", about_homes_path, class: "nav-link text-dark" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'ゲストログイン', public_guest_sign_in_path, method: :post, class: "nav-link text-dark" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "新規登録", new_customer_registration_path, class: "nav-link text-dark" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "ログイン", new_customer_session_path, class: "nav-link text-dark" %>
-      </li>
-    </nav>
-  <% end %>
+<header class="mb-5">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+    <!--<a class="navbar-brand" href="#">nokotter</a>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <% if customer_signed_in? %>
+        <li class="nav-item active">
+          <%= link_to "マイページ", customer_path(current_customer), class: "nav-link text-dark" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "タイムライン", customer_timeline_index_path(current_customer), class: "nav-link text-dark" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "みんなのレシピ", recipes_path, class: "nav-link text-dark" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link text-dark" %>
+        </li>
+      <% elsif admin_signed_in? %>
+        <li class="nav-item active">
+          <%= link_to "ユーザー一覧", admin_customers_path, class: "nav-link text-dark" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-dark" %>
+        </li>
+      <% else %>
+        <li class="nav-item active">
+          <%= link_to "これはなに？", about_homes_path, class: "nav-link text-dark" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'ゲストログイン', public_guest_sign_in_path, method: :post, class: "nav-link text-dark" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規登録", new_customer_registration_path, class: "nav-link text-dark" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログイン", new_customer_session_path, class: "nav-link text-dark" %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  </nav>
 </header>

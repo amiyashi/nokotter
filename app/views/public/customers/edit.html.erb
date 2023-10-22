@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <div class="d-flex align-items-center">
-        <h4 class="my-3 ml-4">マイページ編集</h4>
+        <h4 class="title my-3 ml-4">マイページ編集</h4>
       </div>
       <%= form_with model: @customer, url: customer_path(current_customer), method: :patch do |f| %>
       <table class="table table-list">
@@ -10,21 +10,20 @@
           <td><%= f.file_field :profile_image, accept: "image/*" %></td>
         </tr>
         <tr>
-          <td style="width: 20%", class="bg-light">ユーザーネーム</td>
+          <th class="table-edit-title" style="width: 20%", bgcolor="#BFA595">ユーザーネーム</th>
           <td><%= f.text_field :nickname, autofocus: true %></td>
         </tr>
         <tr>
-          <td class="bg-light"><%= f.label :birth_date, "生年月日" %></td>
+          <th class="table-edit-title" bgcolor="#BFA595"><%= f.label :birth_date, "生年月日" %></th>
           <td><%= f.date_select :birth_date, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1) %></td>
-          <td></td>
         </tr>
         <tr>
-          <td class="bg-light"><%= f.label :email, "メールアドレス" %></td>
+          <th class="table-edit-title" bgcolor="#BFA595"><%= f.label :email, "メールアドレス" %></th>
           <td><%= f.email_field :email, autocomplete: "email", placeholder: "sample@example.com" %></td>
         </tr>
       </table>
-      <%= f.submit "編集内容を保存", class:"btn btn-outline-secondary" %>
-        <%= link_to "退会する", confirm_withdrawal_customers_path, class:"btn btn-outline-danger" %>
+      <%= f.submit "編集内容を保存", class: "btn btn-secondary" %>
+        <%= link_to "退会する", confirm_withdrawal_customers_path, class: "btn btn-danger" %>
       <% end %>
     </div>
   </div>

@@ -1,6 +1,10 @@
 // Bootstrap導入のための追記
 @use '~bootstrap/scss/bootstrap';
 
+// <style>
+//   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');
+// </style>
+
 body {
   // ref: https://coliss.com/articles/build-websites/operation/css/css-responsive-full-background-image-by-sixrevisions.html
 
@@ -24,4 +28,33 @@ body {
 
   // ref: https://developer.mozilla.org/ja/docs/Web/CSS/background-blend-mode
   background-blend-mode: lighten;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #8a3319 ;
+}
+
+.my-page-text {
+  color: #8a3319 ;
+}
+
+.card-body-title {
+  color: #583822 ;
+}
+
+.table-title {
+  color: #D9C7B8 ;
+}
+
+.table-body {
+  color: #593723 ;
+}
+
+.table-edit-title {
+  color: #D9C7B8 ;
+}
+
+.title {
+  color: #593723 ;
 }

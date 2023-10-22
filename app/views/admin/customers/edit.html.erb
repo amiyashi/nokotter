@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h2><%= @customer.last_name %> <%= @customer.first_name %>さんの会員詳細</h2>
+    <h2><%= @customer.nickname %>さんの会員詳細</h2>
   </div>
 
   <div class="row">
@@ -9,13 +9,7 @@
       <tbody>
         <tr>
           <td style="width: 30%">名前</td>
-          <td style="width: 35%"><%= f.text_field :last_name, placeholder: "令和", autofocus: true %></td>
-          <td style="width: 35%"><%= f.text_field :first_name, placeholder: "花子" %></td>
-        </tr>
-        <tr>
-          <td>フリガナ</td>
-          <td><%= f.text_field :last_name_kana, placeholder: "レイワ" %></td>
-          <td><%= f.text_field :first_name_kana, placeholder: "ハナコ" %></td>
+          <td style="width: 35%"><%= f.text_field :nickname, placeholder: "令和", autofocus: true %></td>
         </tr>
         <tr>
           <td><%= f.label :birth_date, "生年月日" %></td>

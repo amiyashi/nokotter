@@ -1,7 +1,7 @@
 <div class="container mt-4 align-items-center">
   <div class='mx-auto mb-5'>
     <%= form_with model: @recipe, url: recipes_path, local: true do |f| %>
-      <div class="bg-white w-50 mb-4">
+      <div class="w-50 mb-4">
         <h6 class="mb-3"><i class="fas fa-camera font-color-pink mr-2"></i>写真をアップロード</h6>
         <%= f.file_field :image %>
       </div>
@@ -10,7 +10,7 @@
       <label>タグ(,で区切ると複数タグ登録できます)</label>
       <%= f.text_field :name, placeholder: "（例）簡単,パプリカ", class: 'form-control mb-4' %>
       <label>材料、分量</label>
-      <!-- 材料、分量フォームの隠し要素テンプレート、display: noneを指定しているため表示はされない -->
+      <!-- 材料、分量フォームの隠しテンプレート、display: noneを指定しているため表示はされない -->
       <div id="ingredient-fields-template" style="display: none;">
         <!-- 新しいIngredientオブジェクトを作成, 新たに追加されるフォームに一意なインデックスを付与 -->
         <%= f.fields_for :ingredients, Ingredient.new, child_index: "new_ingredient" do |ingredient_field| %>
@@ -23,9 +23,10 @@
       <% end %>
       <div id="ingredients"></div>
       <div>
-        <!--材料、分量フォームを追加できる-->
+        <!--材料、分量フォームを追加ボタン-->
         <button type="button" id="add-ingredient" class="btn mb-4" style="background-color: #FFD5EC;">材料を追加</button>
       </div>
+      <label>作り方</label>
       <!--作り方フォームの隠し要素テンプレート-->
       <div id="procedure-fields-template" style="display: none;">
         <!--新しいRecipeStepオブジェクトを作成-->
@@ -42,7 +43,9 @@
         <!--作り方フォームを追加できる-->
         <button type="button" id="add-procedure" class="btn" style="background-color: #FFD5EC;">作り方を追加</button>
       </div>
-      <%= f.submit "投稿する", class: 'btn btn-success mb-5 ml-3' %>
+      <div class="mt-5 pb-4">
+        <%= f.submit "投稿する", class: 'btn btn-outline-secondary' %>
+      </div>
     <% end %>
   </div>
 </div>

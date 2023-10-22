@@ -1,15 +1,20 @@
-<div class="body-field form-group">
+<div class="body-field row align-items-center">
   <%= f.hidden_field :_destroy %>
-  <div class="form-group">
-    <%= f.label :body, raw("作り方" + content_tag(:span, "（必須）", class: "required-label")) %>
-    <div class="input-group">
-      <%= f.text_area :body, class: "form-control", rows: "2" %>
+  <div class="col">
+    <div class="form-group">
+      <%= f.text_area :body, placeholder: "作り方（必須）", class: "form-control", rows: "2" %>
+      <%#= f.label :body, raw("作り方" + content_tag(:span, "", class: "required-label")) %>
+    </div>
+  </div>
+  <div class="col-auto">
+    <!--<div class="input-group">-->
+      <%#= f.text_area :body, placeholder: "作り方（必須）", class: "form-control", rows: "2" %>
       <div class="input-group-append ml-4">
         <button type="button" class="btn btn-danger remove-body">
           <i class="fas fa-trash-alt"></i>
         </button>
       </div>
-    </div>
+    <!--</div>-->
   </div>
 </div>
 

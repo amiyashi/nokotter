@@ -1,9 +1,7 @@
 // Bootstrap導入のための追記
 @use '~bootstrap/scss/bootstrap';
 
-// <style>
-//   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');
-// </style>
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500;900&family=Noto+Sans+JP:wght@300&display=swap');
 
 body {
   // ref: https://coliss.com/articles/build-websites/operation/css/css-responsive-full-background-image-by-sixrevisions.html
@@ -28,6 +26,9 @@ body {
 
   // ref: https://developer.mozilla.org/ja/docs/Web/CSS/background-blend-mode
   background-blend-mode: lighten;
+
+  font-family: 'M PLUS 1p', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 .nav-link {

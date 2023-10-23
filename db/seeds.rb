@@ -45,26 +45,23 @@ recipe_data.each do |data|
   end
 end
 
+tag_recipe_relations = [
+  { recipe_id: 1, tag_ids: [1, 2, 3, 4] },
+  { recipe_id: 2, tag_ids: [5, 6] },
+  { recipe_id: 3, tag_ids: [5, 7, 8, 9, 10] },
+  { recipe_id: 4, tag_ids: [11, 12, 13, 14, 15] },
+  { recipe_id: 5, tag_ids: [15, 16, 17] }
+]
 
-[1, 2, 3, 4].each do |tag_id|
-   RecipeTagRelation.find_or_create_by!(recipe_id: 1, tag_id: tag_id)
+tag_recipe_relations.each do |relation|
+  recipe_id = relation[:recipe_id]
+  tag_ids = relation[:tag_ids]
+
+  tag_ids.each do |tag_id|
+    RecipeTagRelation.find_or_create_by!(recipe_id: recipe_id, tag_id: tag_id)
+  end
 end
 
-[5, 6].each do |tag_id|
-   RecipeTagRelation.find_or_create_by!(recipe_id: 2, tag_id: tag_id)
-end
-
-[5, 7, 8, 9, 10].each do |tag_id|
-   RecipeTagRelation.find_or_create_by!(recipe_id: 3, tag_id: tag_id)
-end
-
-[11, 12, 13, 14, 15].each do |tag_id|
-   RecipeTagRelation.find_or_create_by!(recipe_id: 4, tag_id: tag_id)
-end
-
-[15, 16, 17].each do |tag_id|
-   RecipeTagRelation.find_or_create_by!(recipe_id: 5, tag_id: tag_id)
-end
 
 ingredients_data = [
 { name: "茄子", recipe_id: 1, amount: "2本" },

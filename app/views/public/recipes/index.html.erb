@@ -1,17 +1,6 @@
 <div class="container">
 
-  <div class="search">
-    <%= search_form_for @q do |f| %>
-    <!--<div class="input-group mb-3">-->
-      <!--<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">-->
-      <%= f.search_field :title_or_tags_name_cont, placeholder: "料理名・食材で探す" %>
-      <!--<div class="input-group-append">-->
-        <!--<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>-->
-      <%= f.submit %>
-      <!--</div>-->
-    <!--</div>-->
-    <% end %>
-  </div>
+  <%= render 'public/shared/search_form', q: @q %>
 
   <div class="row mt-5">
     <div class="col-md-4">

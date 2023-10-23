@@ -24,7 +24,7 @@ class Public::RecipesController < ApplicationController
     # 受け取った値を,で区切って配列にする
     tag_list = params[:recipe][:name].split(',')
     # tag_list = params[:recipe][:name].split(',')
-    if @recipe.save!
+    if @recipe.save
       @recipe.save_tags(tag_list)
       redirect_to recipe_path(@recipe)
       flash[:notice] = "レシピを投稿しました！"

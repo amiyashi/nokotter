@@ -1,6 +1,5 @@
 class Public::CustomersController < ApplicationController
-  # ログインしてるユーザーにのみプロフィール見れる
-  # before_action :authenticate_user!
+  before_action :is_matching_login_customer, only: [:edit, :update]
   before_action :ensure_normal_customer, only: [:edit, :update, :withdrawal]
 
   def new
@@ -58,6 +57,13 @@ class Public::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:nickname, :birth_date, :customer_id, :profile_image, :email)
+  end
+
+  def is_matching_login_customer
+    customer = Customer.find(params[:id])
+    unless customer.id == current_customer.id
+      redirect_to recipes_path
+    end
   end
 
   def ensure_normal_customer

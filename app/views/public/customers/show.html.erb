@@ -1,5 +1,6 @@
-<div class="pb-3" style="display: flex; align-items: center;">
-  <h5 class="my-page-text pb-3 pl-3"><%= @customer.nickname %>のマイページ</h5>
+<div class="p-3" style="display: flex; align-items: center;">
+  <div><%= image_tag @customer.get_profile_image(60,60) %></div>
+  <h5 class="my-page-text text-align-center pl-4"><%= @customer.nickname %>のマイページ</h5>
   <p id="follow_buttons_<%= @customer.id %>" style="margin-left: 20px;">
     <% if @customer != current_customer %>
       <%= render "public/relationships/btn", customer: @customer %>
@@ -9,18 +10,55 @@
 <div class="tabs">
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#section1">投稿済みレシピ</a>
+      <a class="nav-link active" data-toggle="tab" href="#section1">プロフィール</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#section2">保存済みレシピ</a>
+      <a class="nav-link" data-toggle="tab" href="#section2">投稿済みレシピ</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#section3">プロフィール</a>
+      <a class="nav-link" data-toggle="tab" href="#section3">保存済みレシピ</a>
     </li>
   </ul>
 
   <div class="tab-content">
     <div id="section1" class="tab-pane fade show active">
+      <div class="container">
+        <div class="row">
+          <div class="col-10 mx-auto">
+            <div class="d-flex align-items-center">
+              <% if @customer == current_customer %>
+                <strong class="mt-4 mb-3"><%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-secondary ml-4 mt-2" %></strong>
+              <% end %>
+            </div>
+            <table class="table table-list">
+              <tr>
+                <th><%= image_tag @customer.get_profile_image(130,130) %></td>
+                <td>
+                  <h6><strong class="pr-2"><%= link_to @customer.followings.count, followings_customer_path %></strong>フォロー中</h6>
+                  <h6><strong class="pr-2"><%= link_to @customer.followers.count, followers_customer_path %></strong>フォロワー</h6>
+                </td>
+              </tr>
+              <tr>
+                <th class="table-title" style="width: 20%", bgcolor="#BFA595">ユーザーネーム</th>
+                <td class="table-body" bgcolor="#D9C7B8"><%= @customer.nickname %></td>
+              </tr>
+              <% if @customer == current_customer %>
+                <tr>
+                  <th class="table-title" bgcolor="#BFA595">生年月日</th>
+                  <td class="table-body" bgcolor="#D9C7B8"><%= @customer.birth_date %></td>
+                </tr>
+                <tr>
+                  <th class="table-title" bgcolor="#BFA595">メールアドレス</th>
+                  <td class="table-body" bgcolor="#D9C7B8"><%= @customer.email %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="section2" class="tab-pane fade">
       <div class="container">
         <div class="row">
           <% @recipes.each do |recipe| %>
@@ -44,7 +82,7 @@
       </div>
     </div>
 
-    <div id="section2" class="tab-pane fade">
+    <div id="section3" class="tab-pane fade">
       <div class="container">
         <div class="row">
           <% if @bookmark_list.present? %>
@@ -64,41 +102,6 @@
             </div>
             <% end %>
           <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div id="section3" class="tab-pane fade">
-      <div class="container">
-        <div class="row">
-          <div class="col-10 mx-auto">
-            <div class="d-flex align-items-center">
-              <% if @customer == current_customer %>
-                <strong class="mt-4 mb-3"><%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-secondary ml-4 mt-2" %></strong>
-              <% end %>
-            </div>
-            <table class="table table-list">
-              <tr>
-                <th><%= image_tag @customer.get_profile_image(130,130) %></td>
-                <td>
-                  <h6><strong class="pr-2"><%= link_to @customer.followings.count, followings_customer_path %></strong>フォロー中</h6>
-                  <h6><strong class="pr-2"><%= link_to @customer.followers.count, followers_customer_path %></strong>フォロワー</h6>
-                </td>
-              </tr>
-              <tr>
-                <th class="table-title" style="width: 20%", bgcolor="#BFA595">ユーザーネーム</th>
-                <td class="table-body" bgcolor="#D9C7B8"><%= @customer.nickname %></td>
-              </tr>
-              <tr>
-                <th class="table-title" bgcolor="#BFA595">生年月日</th>
-                <td class="table-body" bgcolor="#D9C7B8"><%= @customer.birth_date %></td>
-              </tr>
-              <tr>
-                <th class="table-title" bgcolor="#BFA595">メールアドレス</th>
-                <td class="table-body" bgcolor="#D9C7B8"><%= @customer.email %></td>
-              </tr>
-            </table>
-          </div>
         </div>
       </div>
     </div>

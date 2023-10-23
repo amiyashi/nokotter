@@ -7,7 +7,8 @@ customer_data = [
   { email: "keizi@example.com", nickname: "けいじさま", password: "123456", image_filename: "sample-user2.jpg" },
   { email: "miduki@example.com", nickname: "みー", password: "123456", image_filename: "sample-user3.jpg" },
   { email: "masato@example.com", nickname: "まっかー", password: "123456", image_filename: "sample-user4.jpg" },
-  { email: "hokuto@example.com", nickname: "ほっくー", password: "123456", image_filename: "sample-user5.jpg" }
+  { email: "hokuto@example.com", nickname: "ほっくー", password: "123456", image_filename: "sample-user5.jpg" },
+  { email: "syun@example.com", nickname: "おんちゃん", password: "123456" }
 ]
 
 customer_data.each do |data|

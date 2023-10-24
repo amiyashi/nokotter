@@ -4,7 +4,6 @@
   }
 </style>
 
-
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-6">
@@ -79,17 +78,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <div class="container">
-
   <div class="row mt-5">
     <div class="col-md-4">
       <h3 class="title">みんなの残り物レシピ</h3>
     </div>
-
     <div class="col-md-5">
       <%= link_to "レシピ追加", new_recipe_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>
-
   <div class="row">
     <% @recipes.each do |recipe| %>
       <div class="col-md-3 mb-5 mt-5">
@@ -109,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     <% end %>
   </div>
-
 </div>
 
 

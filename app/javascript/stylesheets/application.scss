@@ -81,3 +81,10 @@ body {
 .nav-link active {
   background-color: #8C6F5E;
 }
+
+/* カスタムの中サイズボタン */
+.btn-md {
+   /* パディングを調整してサイズを変更 */
+  font-size: 1rem; /* フォントサイズを調整 */
+  line-height: 1.5;
+}

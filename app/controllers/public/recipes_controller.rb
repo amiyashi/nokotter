@@ -66,7 +66,8 @@ class Public::RecipesController < ApplicationController
     recipe = Recipe.find(params[:id])
     recipe.destroy
     # Comment.find(params[:id]).destroy
-    redirect_to new_recipe_path
+    flash[:notice] = "レシピを削除しました。"
+    redirect_to recipes_path
   end
 
   def search_tag

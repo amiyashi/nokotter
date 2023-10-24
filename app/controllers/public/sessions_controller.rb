@@ -12,7 +12,7 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for(resource)
-    customer_timeline_index_path(current_customer)
+    recipes_path
   end
 
   def after_sign_out_path_for(resource)

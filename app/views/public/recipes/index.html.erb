@@ -89,12 +89,18 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="row">
     <% @recipes.each do |recipe| %>
       <div class="col-md-3 mb-5 mt-5">
-        <div class="card">
+        <div class="card h-100">
           <%= image_tag recipe.image, class: "img-fluid" %>
           <div class="card-body text-center">
             <h5 class="card-title">
-              <%= image_tag recipe.customer.get_profile_image(70,70) %>
-              <%= link_to recipe.title, recipe_path(recipe) %>
+              <div class="d-flex align-items-center">
+                <div>
+                  <%= image_tag recipe.customer.get_profile_image(70,70) %>
+                </div>
+                <div class="ml-2">
+                  <%= link_to recipe.title, recipe_path(recipe) %>
+                </div>
+              </div>
             </h5>
             <p class="card-text">
               <%= recipe.bookmarks.count %> 保存

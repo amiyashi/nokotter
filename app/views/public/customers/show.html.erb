@@ -61,17 +61,23 @@
           <div class="row mt-5">
             <% @recipes.each do |recipe| %>
             <div class="col-md-3 mb-5 mt-5">
-              <div class="card">
+              <div class="card h-100">
                 <%= image_tag recipe.image, class: "img-fluid" %>
-                <div class="card-body" style="display: flex; align-items: center">
-                  <div class="card-body-image">
-                    <%= image_tag recipe.customer.get_profile_image(80,80) %>
-                  </div>
-                  <div class="card-body-title">
-                    <%= link_to recipe_path(recipe) do %>
-                      <%= recipe.title %>
-                    <% end %>
-                  </div>
+                <div class="card-body text-center">
+                  <h5 class="card-title">
+                    <div class="d-flex align-items-center">
+                      <div>
+                        <%= image_tag recipe.customer.get_profile_image(70,70) %>
+                      </div>
+                      <div class="ml-2">
+                        <%= link_to recipe.title, recipe_path(recipe) %>
+                      </div>
+                    </div>
+                  </h5>
+                  <p class="card-text">
+                    <%= recipe.bookmarks.count %> 保存
+                    <%= recipe.comments.count %> コメント
+                  </p>
                 </div>
               </div>
             </div>
@@ -84,15 +90,23 @@
           <div class="row mt-5">
             <% if @bookmark_list.present? %>
               <% @bookmark_list.each do |recipe| %>
-              <div class="col-md-4  mb-5 mt-5">
-                <div class="card">
+              <div class="col-md-3 mb-5 mt-5">
+                <div class="card h-100">
                   <%= image_tag recipe.image, class: "img-fluid" %>
                   <div class="card-body text-center">
-                    <p class="card-title">
-                      <%= image_tag @customer.get_profile_image(80,80) %>
-                      <%= link_to recipe_path(recipe) do %>
-                        <%= recipe.title %>
-                      <% end %>
+                    <h5 class="card-title">
+                      <div class="d-flex align-items-center">
+                        <div>
+                          <%= image_tag @customer.get_profile_image(70,70) %>
+                        </div>
+                        <div class="ml-2">
+                          <%= link_to recipe.title, recipe_path(recipe) %>
+                        </div>
+                      </div>
+                    </h5>
+                    <p class="card-text">
+                      <%= recipe.bookmarks.count %> 保存
+                      <%= recipe.comments.count %> コメント
                     </p>
                   </div>
                 </div>

@@ -1,18 +1,98 @@
-<div class="container">
+<style>
+  .accordion-content {
+      display: none;
+  }
+</style>
 
-  <%= render 'public/shared/search_form', q: @q %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="card accordion-container">
+        <div class="card-body accordion-title js-accordion-title">
+          検索から探す
+        </div>
+        <div class="card-body accordion-content">
+          <%= render 'public/shared/search_form', q: @q %>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="card accordion-container">
+        <div class="card-body accordion-title js-accordion-title">
+          タグ一覧から探す
+        </div>
+        <div class="card-body accordion-content">
+          <div class="row" id="tagListContainer">
+            <% sorted_tags = @tag_list.sort_by { |list| -list.recipes.count } %>
+            <% sorted_tags.each_with_index do |list, index| %>
+              <div class="col-6 col-sm-4 col-md-3 col-lg-5 tag-item" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; <% if index >= 10 %>display: none;<% end %>">
+                <i class="fas fa-tag"></i>
+                <%= link_to list.name, search_tag_recipes_path(tag_id: list.id), title: list.name %>
+                (<%= list.recipes.count %>)
+              </div>
+            <% end %>
+            <!-- もっと見るボタン -->
+            <a href="#" class="show-more-tags">もっと見る</a>
+            <!-- 元に戻すボタン -->
+            <a href="#" class="show-less-tags" style="display: none;">元に戻す</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  const accordionTitles = document.querySelectorAll('.js-accordion-title');
+  accordionTitles.forEach(title => {
+      title.addEventListener('click', () => {
+          const content = title.nextElementSibling;
+          content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+  });
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var showMoreTags = document.querySelector('.show-more-tags');
+  var showLessTags = document.querySelector('.show-less-tags');
+  var hiddenTags = document.querySelectorAll('.tag-item:nth-child(n+11)');
+
+  showMoreTags.addEventListener('click', function() {
+    hiddenTags.forEach(function(tag) {
+      tag.style.display = 'block';
+    });
+    showMoreTags.style.display = 'none';
+    showLessTags.style.display = 'inline';
+  });
+
+  showLessTags.addEventListener('click', function() {
+    hiddenTags.forEach(function(tag) {
+      tag.style.display = 'none';
+    });
+    showMoreTags.style.display = 'inline';
+    showLessTags.style.display = 'none';
+  });
+});
+</script>
+
+
+
+
+
+
+
+<div class="container">
 
   <div class="row mt-5">
     <div class="col-md-4">
       <h3 class="title">みんなの残り物レシピ</h3>
     </div>
-        <!--<div class="d-flex">-->
-        <!-- タグ一覧 -->
-        <!--<%# @tag_list.each do |list| %>-->
-        <!--  <i class="fas fa-tag"></i>-->
-        <!--  <%#= link_to list.name, search_tag_recipes_path(tag_id: list.id) %>-->
-        <!--  (<%#= list.recipes.count %>)-->
-        <!--<%# end %>-->
+
     <div class="col-md-5">
       <%= link_to "レシピ追加", new_recipe_path, class: "btn btn-outline-secondary" %>
     </div>
@@ -39,3 +119,6 @@
   </div>
 
 </div>
+
+
+

@@ -6,8 +6,9 @@ class Public::RecipesController < ApplicationController
     @customer = current_customer
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result(distinct: true).includes(:customer).order(created_at: :desc)
-    # @recipe = Recipe.find(params[:id])
+    # @recipe = Recipe.all
     # @tag_list = @recipe.tags.pluck(:name).join(',')
+    @tag_list = Tag.all
   end
 
   def new
@@ -23,7 +24,6 @@ class Public::RecipesController < ApplicationController
     @recipe.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にする
     tag_list = params[:recipe][:name].split(',')
-    # tag_list = params[:recipe][:name].split(',')
     if @recipe.save
       @recipe.save_tags(tag_list)
       redirect_to recipe_path(@recipe)

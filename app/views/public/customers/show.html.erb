@@ -32,9 +32,8 @@
               <table class="table table-list">
                 <tr>
                   <th><%= image_tag @customer.get_profile_image(130,130) %></td>
-                  <td>
-                    <h6><strong class="pr-2"><%= link_to @customer.followings.count, followings_customer_path %></strong>フォロー中</h6>
-                    <h6><strong class="pr-2"><%= link_to @customer.followers.count, followers_customer_path %></strong>フォロワー</h6>
+                  <td id="follow_count">
+                    <%= render "public/relationships/follow_count", customer: @customer %>
                   </td>
                 </tr>
                 <tr>

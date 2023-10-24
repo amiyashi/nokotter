@@ -43,47 +43,39 @@
   </div>
 </div>
 
-
-
 <script>
-  const accordionTitles = document.querySelectorAll('.js-accordion-title');
+  const accordionTitles = document.querySelectorAll('.js-accordion-title'); // アコーディオンのタイトル要素を取得
   accordionTitles.forEach(title => {
-      title.addEventListener('click', () => {
-          const content = title.nextElementSibling;
-          content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      title.addEventListener('click', () => {  // タイトル要素がクリックされたときの処理
+          const content = title.nextElementSibling; // タイトルの次の要素を取得
+          content.style.display = content.style.display === 'block' ? 'none' : 'block'; // コンテンツの表示/非表示を切り替え
       });
   });
 </script>
 
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var showMoreTags = document.querySelector('.show-more-tags');
-  var showLessTags = document.querySelector('.show-less-tags');
-  var hiddenTags = document.querySelectorAll('.tag-item:nth-child(n+11)');
+  var showMoreTags = document.querySelector('.show-more-tags'); // "もっと見る"ボタンを取得
+  var showLessTags = document.querySelector('.show-less-tags'); // "元に戻す"ボタンを取得
+  var hiddenTags = document.querySelectorAll('.tag-item:nth-child(n+11)'); // 非表示のタグ要素を取得
 
-  showMoreTags.addEventListener('click', function() {
+  showMoreTags.addEventListener('click', function() { // "もっと見る"ボタンがクリックされたときの処理
     hiddenTags.forEach(function(tag) {
-      tag.style.display = 'block';
+      tag.style.display = 'block'; // 非表示のタグを表示
     });
-    showMoreTags.style.display = 'none';
-    showLessTags.style.display = 'inline';
+    showMoreTags.style.display = 'none'; // "もっと見る"ボタンを非表示
+    showLessTags.style.display = 'inline'; // "元に戻す"ボタンを表示
   });
 
-  showLessTags.addEventListener('click', function() {
+  showLessTags.addEventListener('click', function() { // "元に戻す"ボタンがクリックされたときの処理
     hiddenTags.forEach(function(tag) {
-      tag.style.display = 'none';
+      tag.style.display = 'none'; // 非表示のタグを再び非表示
     });
-    showMoreTags.style.display = 'inline';
-    showLessTags.style.display = 'none';
+    showMoreTags.style.display = 'inline'; // "もっと見る"ボタンを表示
+    showLessTags.style.display = 'none'; // "元に戻す"ボタンを非表示
   });
 });
 </script>
-
-
-
-
-
 
 
 <div class="container">

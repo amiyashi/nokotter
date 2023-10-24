@@ -1,26 +1,28 @@
 <div class="container">
   <h3><%=@tag.name%>の投稿一覧</h3>
-  <!--タグリスト-->
-  <!--<%# @tag_list.each do |list|%>-->
-  <!--  <i class="fa-sharp fa-solid fa-tag"></i>-->
-  <!--  <%#=link_to list.name,search_tag_recipes_path(tag_id: list.id) %>-->
-  <!--  <%#="(#{list.recipes.count})" %>-->
-  <!--<%# end %>-->
   <div class="row">
     <% @recipes.each do |recipe| %>
-      <div class="col-md-4  mb-5 mt-5">
-        <div class="card">
+      <div class="col-md-3 mb-5 mt-5">
+        <div class="card h-100">
           <%= image_tag recipe.image, class: "img-fluid" %>
           <div class="card-body text-center">
+            <h5 class="card-title">
+              <div class="d-flex align-items-center">
+                <div>
+                  <%= image_tag recipe.customer.get_profile_image(70,70) %>
+                </div>
+                <div class="ml-2">
+                  <%= link_to recipe.title, recipe_path(recipe) %>
+                </div>
+              </div>
+            </h5>
             <p class="card-text">
-              <%= image_tag recipe.customer.get_profile_image(80,80) %>
-              <%= link_to recipe_path(recipe) do %>
-                <%= recipe.title %>
-              <% end %>
+              <%= recipe.bookmarks.count %> 保存
+              <%= recipe.comments.count %> コメント
             </p>
           </div>
         </div>
       </div>
-      <% end %>
+    <% end %>
   </div>
 </div>

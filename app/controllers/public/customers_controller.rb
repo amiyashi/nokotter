@@ -1,6 +1,7 @@
 class Public::CustomersController < ApplicationController
   before_action :is_matching_login_customer, only: [:edit, :update]
   before_action :ensure_normal_customer, only: [:edit, :update, :withdrawal]
+  before_action :check_customer_status,  only:[:show]
 
   def new
     @customer = Customer.new
@@ -35,10 +36,11 @@ class Public::CustomersController < ApplicationController
   # end
 
   def withdrawal
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
     # 退会済み会員の場合
     @customer.update(is_deleted: true)
     reset_session
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
     redirect_to root_path
   end
 
@@ -70,6 +72,13 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
     if @customer.email == 'guest@example.com'
      redirect_to root_path, alert: 'ゲストユーザーはプロフィール編集できません。'
+    end
+  end
+
+  def check_customer_status
+    customer = Customer.find(params[:id])
+    if customer.is_deleted
+      redirect_to root_path
     end
   end
 

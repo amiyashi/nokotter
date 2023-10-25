@@ -43,6 +43,10 @@ class Customer < ApplicationRecord
       customer.birth_date = Date.new(2000, 1, 1)
     end
   end
+  #退会ユーザーはログインできない
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
 
   # プロフィール画像
   def get_profile_image(width, height)

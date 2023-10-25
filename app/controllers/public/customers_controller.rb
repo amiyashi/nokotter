@@ -78,7 +78,7 @@ class Public::CustomersController < ApplicationController
   def check_customer_status
     customer = Customer.find(params[:id])
     if customer.is_deleted
-      redirect_to root_path
+      redirect_to root_path, alert: '退会済みのため再度登録し、お楽しみください。'
     end
   end
 

@@ -1,5 +1,5 @@
 Admin.find_or_create_by!(email: 'admin@email.com') do |admin|
- admin.password = 'admin_passwprd'
+ admin.password = 'admin_password'
 end
 
 customer_data = [
@@ -22,16 +22,18 @@ end
 
 
 tag_names = [
-  "パプリカ", "ピーマン", "茄子", "簡単", "おつまみ",
-  "餃子アレンジ", "鶏もも消費", "あっさり", "お家で中華", "中華料理",
-  "炊き込みご飯", "炊飯器", "炊飯器レシピ", "ズボラレシピ", "和風レシピ",
-  "汁物", "豚汁", "秋", "おやつ", "サラダ",
+  "パプリカ", "ピーマン", "茄子", "挽肉",
+  "手羽先","餃子の餡",
+  "鶏むね",
+  "人参", "きのこ",
+  "大根","さつまいも", "玉ねぎ", "長ネギ",
+  "かぼちゃ",
+  "エリンギ", "豚肉","ニラ",
 ]
 
 tag_names.each do |name|
   Tag.find_or_create_by!(name: name)
 end
-
 
 recipe_data = [
   { title: "夏野菜カレー", image_filename: "夏野菜カレー.jpg", customer_id: 1 },
@@ -57,13 +59,13 @@ end
 tag_recipe_relations = [
   { recipe_id: 1, tag_ids: [1, 2, 3, 4] },
   { recipe_id: 2, tag_ids: [5, 6] },
-  { recipe_id: 3, tag_ids: [5, 7, 8, 9, 10] },
-  { recipe_id: 4, tag_ids: [11, 12, 13, 14, 15] },
-  { recipe_id: 5, tag_ids: [15, 16, 17] },
-  { recipe_id: 6, tag_ids: [4, 18, 19] },
-  { recipe_id: 7, tag_ids: [18, 20] },
-  { recipe_id: 8, tag_ids: [4] },
-  { recipe_id: 9, tag_ids: [4] }
+  { recipe_id: 3, tag_ids: [7] },
+  { recipe_id: 4, tag_ids: [7, 8, 9] },
+  { recipe_id: 5, tag_ids: [8, 9, 10, 11, 12, 13] },
+  { recipe_id: 6, tag_ids: [11] },
+  { recipe_id: 7, tag_ids: [14] },
+  { recipe_id: 8, tag_ids: [15, 16] },
+  { recipe_id: 9, tag_ids: [8, 9, 10, 16, 17] }
 ]
 
 tag_recipe_relations.each do |relation|

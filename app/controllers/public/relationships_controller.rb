@@ -2,6 +2,8 @@ class Public::RelationshipsController < ApplicationController
   before_action :authenticate_customer!
   # フォローするとき
   def create
+    # pp params[:customer_id]
+    # raise
     @customer = Customer.find(params[:customer_id])
     current_customer.follow(params[:customer_id])
   end
@@ -10,8 +12,8 @@ class Public::RelationshipsController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     current_customer.unfollow(params[:customer_id])
   end
-  
-  
+
+
   # # フォロー一覧
   # def follower
   #   customer = Customer.find(params[:customer_id])

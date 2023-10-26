@@ -3,13 +3,12 @@
     <h2><%= @customer.nickname %>さんの会員情報編集</h2>
   </div>
   <div class="row">
-    <div class="col">
-      <div class="d-flex align-items-center">
+    <div class="col-sm-6 px-sm-0 offset-sm-1">
         <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
-          <table>
+          <table class="table" style="background-color: white;">
             <tr>
-              <td><%= image_tag @customer.get_profile_image(130,130) %></td>
               <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+              <td></td>
             </tr>
             <tr>
               <th>ユーザーネーム</th>

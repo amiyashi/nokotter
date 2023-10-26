@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <div class="col-sm-6 px-sm-0 offset-sm-1">
-        <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
+        <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
           <table class="table" style="background-color: white;">
             <tr>
               <td><%= f.file_field :profile_image, accept: "image/*" %></td>

@@ -1,44 +1,41 @@
 <div class="container">
   <div class="row">
-    <h2><%= @customer.nickname %>さんの会員詳細</h2>
+    <h2><%= @customer.nickname %>さんの会員情報編集</h2>
   </div>
-
   <div class="row">
-    <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
-    <table>
-      <tbody>
-        <tr>
-          <td style="width: 30%">名前</td>
-          <td style="width: 35%"><%= f.text_field :nickname, placeholder: "令和", autofocus: true %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :birth_date, "生年月日" %></td>
-          <td><%= f.date_select :birth_date, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1) %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><%= f.label :email, "メールアドレス" %></td>
-          <td><%= f.email_field :email, autocomplete: "email", placeholder: "sample@example.com" %></td>
-        </tr>
-        <tr>
-          <th class="table-active">会員ステータス</th>
-            <td>
-              <%= f.radio_button :is_deleted, false %>
-              <%= f.label :is_deleted, "有効" %>
-              <%= f.radio_button :is_deleted, true %>
-              <%= f.label :is_deleted, "退会" %>
-            <td>
-        </tr>
-        <tr>
-          <td>
-            <div class="mx-auto mt-3 mb-2">
-              <%= f.submit "編集内容を保存", class: "btn btn-success" %>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <% end %>
+    <div class="col">
+      <div class="d-flex align-items-center">
+        <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
+          <table>
+            <tr>
+              <td><%= image_tag @customer.get_profile_image(130,130) %></td>
+              <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <th>ユーザーネーム</th>
+              <td><%= f.text_field :nickname, autofocus: true %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :birth_date, "生年月日" %></th>
+              <td><%= f.date_select :birth_date, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1) %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :email, "メールアドレス" %></th>
+              <td><%= f.email_field :email, autocomplete: "email", placeholder: "sample@example.com" %></td>
+            </tr>
+            <tr>
+              <th>会員ステータス</th>
+                <td>
+                  <%= f.radio_button :is_deleted, false %>
+                  <%= f.label :is_deleted, "有効" %>
+                  <%= f.radio_button :is_deleted, true %>
+                  <%= f.label :is_deleted, "退会" %>
+                <td>
+            </tr>
+          </table>
+          <%= f.submit "編集内容を保存", class: "btn btn-secondary" %>
+        <% end %>
+      </div>
+    </div>
   </div>
-
 </div>

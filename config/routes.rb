@@ -34,12 +34,12 @@ Rails.application.routes.draw do
       # idを渡さないとき➝collection
       collection do
         get :confirm_withdrawal
-        patch :withdrawal
       end
       # idを渡すとき➝member
       member do
         get :followings
         get :followers
+        patch :withdrawal
       end
     end
   end

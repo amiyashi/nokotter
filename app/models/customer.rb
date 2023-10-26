@@ -19,7 +19,7 @@ class Customer < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   # フォローされているユーザーの情報
   has_many :followers, through: :reverse_of_relationships, source: :follower
-  
+
   has_one_attached :profile_image
 
   # フォローするときの処理

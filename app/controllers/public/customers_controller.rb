@@ -64,14 +64,14 @@ class Public::CustomersController < ApplicationController
   def is_matching_login_customer
     customer = Customer.find(params[:id])
     unless customer.id == current_customer.id
-      redirect_to recipes_path
+      redirect_to recipes_path, alert: '?'
     end
   end
 
   def ensure_normal_customer
     @customer = current_customer
     if @customer.email == 'guest@example.com'
-     redirect_to root_path, alert: 'ゲストユーザーはプロフィール編集できません。'
+     redirect_to customer_path(@customer), alert: 'ゲストユーザーはプロフィール編集できません。'
     end
   end
 

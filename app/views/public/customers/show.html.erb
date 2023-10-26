@@ -96,7 +96,7 @@
                     <h5 class="card-title">
                       <div class="d-flex align-items-center">
                         <div>
-                          <%= image_tag @customer.get_profile_image(70,70) %>
+                          <%= image_tag recipe.customer.get_profile_image(70,70) %>
                         </div>
                         <div class="ml-2">
                           <%= link_to recipe.title, recipe_path(recipe) %>

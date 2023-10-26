@@ -13,9 +13,9 @@
         </div>
         <div class="col-md-3 offset-1 pt-3">
           <p id="follow_buttons_<%= @customer.id %>">
-            <%# if customer != current_customer %>
+            <% if customer != current_customer %>
               <%= render "public/relationships/btn", customer: @customer %>
-            <%# end %>
+            <% end %>
           </p>
         </div>
       <% end %>

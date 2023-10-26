@@ -10,6 +10,8 @@ class Public::RelationshipsController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     current_customer.unfollow(params[:customer_id])
   end
+  
+  
   # # フォロー一覧
   # def follower
   #   customer = Customer.find(params[:customer_id])

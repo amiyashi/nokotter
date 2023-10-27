@@ -1,4 +1,5 @@
 # nokotter
+![ウェブサイトデザイン](app/assets/images/about.jpg)
 ​
 ## サイト概要
 ### サイトテーマ

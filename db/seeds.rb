@@ -1,4 +1,4 @@
-Admin.find_or_create_by!(email: 'admin@email.com') do |admin|
+Admin.find_or_create_by!(email: 'admin@example.com') do |admin|
  admin.password = 'admin_password'
 end
 

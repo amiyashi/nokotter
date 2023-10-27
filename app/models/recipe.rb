@@ -38,6 +38,7 @@ class Recipe < ApplicationRecord
   # ブックマーク機能
   # 引数で渡されたcustomer_idがBookmarksテーブルに存在するか
   def favorited_by?(customer)
+    return false unless customer
     bookmarks.exists?(customer_id: customer.id)
   end
   # 検索機能

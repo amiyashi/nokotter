@@ -23,9 +23,9 @@
 - [テーブル定義書](https://docs.google.com/spreadsheets/d/1p8kBx3VR5GLwp3cQW9QOw78Bgp13V1AC/edit#gid=22058163)
 - [UI flows](https://app.diagrams.net/#G1-hh_UuyV0PmUer_UfQPSQO6UH9rPexH8)
 - [実装機能リスト](https://docs.google.com/spreadsheets/d/1ndyJYIRFmsurug0ty-7MhXRFFZoejqSKGOTw2hcf3sM/edit#gid=1898975908)
-- 
+-
 ## 開発環境
-- OS：Windows 11
+- OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery

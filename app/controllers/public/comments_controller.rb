@@ -3,16 +3,19 @@ class Public::CommentsController < ApplicationController
 
   def create
     @recipe = Recipe.find(params[:recipe_id])
-    comment = current_customer.comments.new(comment_params)
-    comment.recipe_id = @recipe.id
     score = Language.get_data(comment_params[:content])
+    p "-------------------"
+    p score
+    p "-------------------"
     if score > 0.0
+      comment = @recipe.comments.new(comment_params)
+      comment.customer_id = current_customer.id
       comment.save
     end
   end
 
   def destroy
-    comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:id])
     Comment.find(params[:id]).destroy
   end
 

@@ -1,6 +1,6 @@
 <%= form_with model: [recipe, comment], local: false do |f| %>
   <div class="form-group mt-5">
-    <%= f.text_area :content, class: "form-control", rows: '3', placeholder: "コメントをここに", id: "comment_textarea"  %>
+    <%= f.text_area :content, class: "form-control", rows: '3', placeholder: "コメントを書こう\n※不適切なコメントは投稿できません。", id: "comment_textarea"  %>
   </div>
   <div class="form-group d-flex justify-content-end btn-md">
     <%= f.submit "送信する" %>

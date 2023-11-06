@@ -14,11 +14,10 @@
   <body>
     <%= render 'layouts/header' %>
     <main>
-      <% if flash[:notice] %>
-        <p class="alert alert-primary mb-0"><%= flash[:notice] %></p>
-      <% end %>
-      <% if flash[:alert] %>
-        <p class="alert alert-dark mb-0"><%= flash.now[:alert] %></p>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+          <%= value %>
+        </div>
       <% end %>
       <%= yield %>
     </main>

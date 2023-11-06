@@ -69,3 +69,5 @@ gem "net-pop"
 gem "net-imap"
 
 gem 'faker'
+
+gem 'rails-i18n'

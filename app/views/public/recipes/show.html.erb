@@ -70,10 +70,10 @@
     </div>
   </div>
 
-  <%= render "public/comments/form", recipe: @recipe, comment: @comment %>
-
   <div id="comment_index">
-       <%= render "public/comments/index", recipe: @recipe %>
+    <%= render "public/comments/index", recipe: @recipe %>
   </div>
+
+  <%= render "public/comments/form", recipe: @recipe, comment: @comment %>
 
 </div>

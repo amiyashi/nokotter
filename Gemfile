@@ -70,4 +70,4 @@ gem "net-imap"
 
 gem 'faker'
 
-gem 'rails-i18n'
+gem 'devise-i18n'

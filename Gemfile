@@ -71,3 +71,5 @@ gem "net-imap"
 gem 'faker'
 
 gem 'devise-i18n'
+
+gem 'kaminari','~> 1.2.1'

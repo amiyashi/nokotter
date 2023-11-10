@@ -5,14 +5,14 @@ class Public::RecipesController < ApplicationController
   def index
     @customer = current_customer
     @q = Recipe.ransack(params[:q])
-    @recipes = @q.result(distinct: true).includes(:customer).order(created_at: :desc)
+    @recipes = @q.result(distinct: true).includes(:customer).order(created_at: :desc).page(params[:page]).per(8)
     # @recipe = Recipe.all
     # @tag_list = @recipe.tags.pluck(:name).join(',')
     @tag_list = Tag.all
   end
 
   def new
-    @recipes = Recipe.all
+    # @recipes = Recipe.all
     @recipe = Recipe.new
     @recipe.ingredients.build
     @recipe.procedures.build

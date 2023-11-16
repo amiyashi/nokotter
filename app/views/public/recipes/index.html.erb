@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <h3 class="title">みんなの残り物レシピ</h3>
     </div>
     <div class="col-md-5">
-      <%= link_to "レシピ追加", new_recipe_path, class: "btn btn-outline-secondary" %>
+      <%= link_to "レシピ追加", new_recipe_path, class: "btn btn-secondary" %>
     </div>
   </div>
   <div class="row">
@@ -115,6 +115,3 @@ document.addEventListener('DOMContentLoaded', function() {
     <%= paginate @recipes %>
   </div>
 </div>
-
-
-

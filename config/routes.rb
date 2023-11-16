@@ -26,7 +26,6 @@ Rails.application.routes.draw do
       # 1人のユーザーは1つの投稿に対して1回しかいいねできない➝id受け渡し必要ない➝resource(単数形)
       collection do
         get :search_tag
-        post :preview
       end
     end
     resources :customers, only: %i(show edit update) do

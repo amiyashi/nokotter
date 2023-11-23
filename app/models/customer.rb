@@ -22,6 +22,8 @@ class Customer < ApplicationRecord
 
   has_one_attached :profile_image
 
+  validates :nickname, presence: true
+
   # フォローするときの処理
   def follow(customer_id)
     relationships.create(followed_id: customer_id)

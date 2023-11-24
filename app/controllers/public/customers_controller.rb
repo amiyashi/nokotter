@@ -3,10 +3,6 @@ class Public::CustomersController < ApplicationController
   before_action :ensure_normal_customer, only: [:edit, :update, :withdrawal]
   before_action :check_customer_status,  only:[:show]
 
-  def new
-    @customer = Customer.new
-  end
-
   def show
     @customer = Customer.find(params[:id])
     # 該当する人の投稿のみ表示させる
@@ -16,6 +12,9 @@ class Public::CustomersController < ApplicationController
     @follower_customers = @customer.followers
     bookmark = Bookmark.where(customer_id: current_customer.id).pluck(:recipe_id)
     @bookmark_list = Recipe.find(bookmark)
+  end
+  def new
+    @customer = Customer.new
   end
 
   def edit

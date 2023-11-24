@@ -10,11 +10,26 @@ class Public::RecipesController < ApplicationController
     @tag_list = Tag.all
   end
 
+  def show
+    @recipe = Recipe.find(params[:id])
+    @comment = Comment.new
+    @tag_list = @recipe.tags.pluck(:name).join(',')
+    @recipe_tags = @recipe.tags
+  end
+
   def new
     # @recipes = Recipe.all
     @recipe = Recipe.new
     @recipe.ingredients.build
     @recipe.procedures.build
+  end
+
+  def edit
+    @recipe = Recipe.find(params[:id])
+    @tag_list = @recipe.tags.pluck(:name).join(',')
+    if @recipe.customer != current_customer
+    redirect_to recipes_path, alert: "他のユーザーのレシピを編集することはできません。"
+    end
   end
 
   def create
@@ -30,21 +45,6 @@ class Public::RecipesController < ApplicationController
     else
       flash.now[:alert] = "投稿内容に不備があります。"
       render :new
-    end
-  end
-
-  def show
-    @recipe = Recipe.find(params[:id])
-    @comment = Comment.new
-    @tag_list = @recipe.tags.pluck(:name).join(',')
-    @recipe_tags = @recipe.tags
-  end
-
-  def edit
-    @recipe = Recipe.find(params[:id])
-    @tag_list = @recipe.tags.pluck(:name).join(',')
-    if @recipe.customer != current_customer
-    redirect_to recipes_path, alert: "他のユーザーのレシピを編集することはできません。"
     end
   end
 
